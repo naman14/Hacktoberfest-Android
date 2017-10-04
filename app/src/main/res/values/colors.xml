@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#fafafa</color>-->
+    <!--<color name="colorPrimaryDark">#e1e1e1</color>-->
+
+    <color name="colorPrimary">#3F51B5</color>
+
+    <color name="colorPrimaryDark">#303F9F</color>
+
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="primaryBlue">#3F51B5</color>
+    <color name="primaryDarkBlue">#303F9F</color>
+
+    <color name="hacktoberfest_background">#2b3890</color>
+    <color name="hactoberfest_text_color">#ff625f</color>
+
+    <color name="windowBackground">#f5f5f5</color>
+
+    <color name="white">@android:color/white</color>
+    <color name="black">@android:color/black</color>
+</resources>
