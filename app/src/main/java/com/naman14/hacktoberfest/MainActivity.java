@@ -50,4 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private void replaceFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
     }
+
+    public BottomBar getBottomBar() {
+        return bottomBar;
+    }
 }

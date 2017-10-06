@@ -3,6 +3,7 @@ package com.naman14.hacktoberfest.fragment;
 import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -19,13 +20,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.naman14.hacktoberfest.MainActivity;
 import com.naman14.hacktoberfest.R;
 import com.naman14.hacktoberfest.adapters.PRAdapter;
 import com.naman14.hacktoberfest.network.entity.Issue;
 import com.naman14.hacktoberfest.network.repository.GithubRepository;
+import com.naman14.hacktoberfest.widgets.GridRecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -34,7 +38,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnTouch;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -54,6 +57,9 @@ public class StatusFragment extends BaseFragment {
     @BindView(R.id.et_username)
     EditText etUsername;
 
+    @BindView(R.id.tv_placeholder)
+    TextView tvPlaceholder;
+
     @BindView(R.id.iv_check)
     ImageView ivCheck;
 
@@ -64,7 +70,7 @@ public class StatusFragment extends BaseFragment {
     View statusView;
 
     @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+    GridRecyclerView recyclerView;
 
     private PRAdapter adapter;
 
@@ -78,7 +84,6 @@ public class StatusFragment extends BaseFragment {
         setToolbar(rootView, "Hacktoberfest");
 
         setupRecyclerview();
-        Picasso.with(getActivity()).load("https://avatars3.githubusercontent.com/u/8599099?v=4").into(ivUserImage);
 
 
         return rootView;
@@ -87,21 +92,23 @@ public class StatusFragment extends BaseFragment {
 
     @OnClick(R.id.iv_check)
     public void checkClicked() {
-        List<Issue> issues = new ArrayList<>();
-        for (int i=0; i<6; i++) {
-            Issue issue = new Issue();
-            issue.setNumber(319);
-            issue.setTitle("Fixes 395 and other improvements");
-            issue.setHtml_url("https://github.com/openMF/community-app/pull/19");
-            issue.setRepository_url("https://api.github.com/repos/openMF/community-app");
-
-            issues.add(issue);
-        }
-
-        adapter.setData(issues);
-
 //        checkPRStatus();
-        scrollToView(scrollView, etUsername);
+
+        tvPlaceholder.setVisibility(View.GONE);
+        statusView.setVisibility(View.GONE);
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showStatus(null);
+
+            }
+        }, 1000);
+
+
     }
 
     private void setupRecyclerview() {
@@ -111,11 +118,13 @@ public class StatusFragment extends BaseFragment {
 
         adapter = new PRAdapter(getActivity());
         recyclerView.setAdapter(adapter);
+
         recyclerView.setNestedScrollingEnabled(false);
 
     }
 
     private void checkPRStatus() {
+        statusView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         GithubRepository.getInstance().findValidPRs(etUsername.getText().toString())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -142,7 +151,50 @@ public class StatusFragment extends BaseFragment {
     }
 
     private void showStatus(Object response) {
+        progressBar.setVisibility(View.GONE);
         statusView.setVisibility(View.VISIBLE);
+        Picasso.with(getActivity()).load("https://avatars3.githubusercontent.com/u/8599099?v=4").into(ivUserImage);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scrollToView(scrollView, etUsername);
+
+            }
+        }, 350);
+
+        Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ((MainActivity)getActivity()).getBottomBar().getShySettings().hideBar();
+            }
+        }, 450);
+
+        Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                List<Issue> issues = new ArrayList<>();
+                for (int i=0; i<6; i++) {
+                    Issue issue = new Issue();
+                    issue.setNumber(319);
+                    issue.setTitle("Fixes 395 and other improvements");
+                    issue.setHtml_url("https://github.com/openMF/community-app/pull/19");
+                    issue.setRepository_url("https://api.github.com/repos/openMF/community-app");
+
+                    issues.add(issue);
+                }
+
+                adapter.setData(issues);
+                recyclerView.scheduleLayoutAnimation();
+
+
+
+            }
+        }, 750);
+
     }
 
 
@@ -152,6 +204,7 @@ public class StatusFragment extends BaseFragment {
         getDeepChildOffset(scrollViewParent, view.getParent(), view, childOffset);
         // Scroll to child.
         scrollViewParent.smoothScrollTo(0, childOffset.y - 50);
+
     }
 
     private void getDeepChildOffset(final ViewGroup mainParent, final ViewParent parent, final View child, final Point accumulatedOffset) {

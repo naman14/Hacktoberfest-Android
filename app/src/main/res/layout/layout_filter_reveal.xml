@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="20dp"
+        android:elevation="6dp"
+        android:src="@drawable/filter"
+        android:stateListAnimator="@animator/raise"
+        app:layout_anchorGravity="bottom|end" />
+
+    <View
+        android:id="@+id/results_scrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/scrim"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/confirm_save_container"
+        android:layout_width="448dp"
+        android:layout_height="448dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/frame_fab_light"
+        android:elevation="6dp"
+        android:theme="@style/ExpandedFabTheme"
+        android:translationX="196dp"
+        android:translationY="196dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="252dp"
+            android:layout_height="252dp"
+            android:layout_gravity="start|top"
+            android:gravity="bottom|end"
+            android:paddingRight="15dp"
+            android:orientation="vertical">
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Language"
+               android:textSize="18sp"
+               android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/save_confirmed"
+                style="?android:borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="16dp"
+                android:drawableLeft="@drawable/ic_done"
+                android:padding="16dp"
+                android:text="Apply"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

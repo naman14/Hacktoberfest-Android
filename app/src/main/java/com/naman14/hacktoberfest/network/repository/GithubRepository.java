@@ -1,6 +1,6 @@
 package com.naman14.hacktoberfest.network.repository;
 
-import com.naman14.hacktoberfest.Utils;
+import com.naman14.hacktoberfest.utils.Utils;
 import com.naman14.hacktoberfest.network.api.GithubApiManager;
 import com.naman14.hacktoberfest.network.entity.Issue;
 import com.naman14.hacktoberfest.network.entity.SearchResponse;

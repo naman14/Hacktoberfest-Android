@@ -19,4 +19,7 @@
 
     <color name="white">@android:color/white</color>
     <color name="black">@android:color/black</color>
+
+    <color name="scrim">#99323232</color>
+    <color name="dark_icon">#99000000</color>
 </resources>

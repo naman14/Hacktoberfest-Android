@@ -7,7 +7,8 @@
     android:background="@android:color/white"
     android:padding="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:elevation="2dp">
+    app:elevation="2dp"
+  >
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"

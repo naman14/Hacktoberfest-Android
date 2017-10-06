@@ -1,6 +1,14 @@
-package com.naman14.hacktoberfest;
+package com.naman14.hacktoberfest.utils;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.Property;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -53,5 +61,33 @@ public class Utils {
                 return "Now you're just showing off!";
         }
     }
+
+    public static int getContrastColor(int colorIntValue) {
+        int red = Color.red(colorIntValue);
+        int green = Color.green(colorIntValue);
+        int blue = Color.blue(colorIntValue);
+        double lum = (((0.299 * red) + ((0.587 * green) + (0.114 * blue))));
+        return lum > 186 ? 0xFF000000 : 0xFFFFFFFF;
+    }
+
+    public static final Property<View, Integer> BACKGROUND_COLOR
+            = new AnimUtils.IntProperty<View>("backgroundColor") {
+
+        @Override
+        public void setValue(View view, int value) {
+            view.setBackgroundColor(value);
+        }
+
+        @Override
+        public Integer get(View view) {
+            Drawable d = view.getBackground();
+            if (d instanceof ColorDrawable) {
+                return ((ColorDrawable) d).getColor();
+            }
+            return Color.TRANSPARENT;
+        }
+    };
+
+
 
 }

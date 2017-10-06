@@ -25,8 +25,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:gravity="center_horizontal|center_vertical"
-                android:textSize="25sp"
-                android:layout_marginTop="20dp"
+                android:textSize="30sp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="25dp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/hactoberfest_text_color"
@@ -66,6 +66,20 @@
         </LinearLayout>
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:id="@+id/tv_placeholder"
+            android:layout_margin="30dp"
+            android:paddingTop="60dp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:drawableTop="@drawable/ic_code"
+            android:drawablePadding="10dp"
+            android:text="Enter your Github username to check your Hacktoberfest status"/>
+
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,7 +92,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/statusView">
+            android:id="@+id/statusView"
+            android:visibility="gone">
 
 
 
@@ -130,19 +145,22 @@
                 android:padding="20dp"
                 android:text="It's not too late to start!"/>
 
+            <com.naman14.hacktoberfest.widgets.GridRecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layoutAnimation="@anim/grid_layout_animation"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/recyclerView"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="300dp"/>
 
     </LinearLayout>
 

@@ -1,5 +1,7 @@
 package com.naman14.hacktoberfest.network.entity;
 
+import java.util.List;
+
 /**
  * Created by naman on 5/10/17.
  */
@@ -9,7 +11,11 @@ public class Issue {
     private String html_url, title, body, createdAt, repository_url;
     private int id, number;
 
+    private String language;
+
     private User user;
+
+    private List<Label> labels;
 
     public String getHtml_url() {
         return html_url;
@@ -73,5 +79,21 @@ public class Issue {
 
     public void setRepository_url(String repository_url) {
         this.repository_url = repository_url;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public List<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<Label> labels) {
+        this.labels = labels;
     }
 }
