@@ -84,7 +84,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <com.naman14.hacktoberfest.widgets.FlowLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

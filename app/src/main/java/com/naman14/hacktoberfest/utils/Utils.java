@@ -1,9 +1,11 @@
 package com.naman14.hacktoberfest.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Property;
 import android.view.View;
@@ -20,6 +22,7 @@ import java.util.List;
 public class Utils {
 
     private static final String HACKTOBERFEST_START = "2017-09-30T00:00:00-12:00..2017-10-31T23:59:59-12:00";
+    private static final String PREFERENCE_LANGUAGE = "preference_language";
 
     public static String getHacktoberfestStatusQuery(String username) {
         return "-label:invalid+created:" + HACKTOBERFEST_START + "+type:pr+is:public+author:" + username;
@@ -28,18 +31,17 @@ public class Utils {
     public static String getHacktoberfestIssuesQuery(String language) {
         String extraQuery = "";
 
-        if (!TextUtils.isEmpty(language)) {
+        if (!TextUtils.isEmpty(language) && !language.equals("All")) {
             extraQuery += "+language:" + language;
         }
         return "+label:hacktoberfest+updated:" + HACKTOBERFEST_START + "+type:issue+state:open" + extraQuery;
     }
 
 
-    public static List<String> getLanguages() {
+    public static String[] getLanguagesArray() {
+        String[] languages = new String[] {"All", "JavaScript", "Python", "PHP", "Java", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
 
-        String[] languages = new String[] {"JavaScript", "Python", "PHP", "Java", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
-
-        return Arrays.asList(languages);
+        return languages;
     }
 
     public static String getStatusMessage(int prCount){
@@ -87,6 +89,17 @@ public class Utils {
             return Color.TRANSPARENT;
         }
     };
+
+
+    public static String getLanguagePreference(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(PREFERENCE_LANGUAGE, "All");
+    }
+
+    public static void setLanguagePreference(Context context, String language) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences.edit().putString(PREFERENCE_LANGUAGE, language).apply();
+    }
 
 
 

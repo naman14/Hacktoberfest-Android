@@ -14,10 +14,10 @@ import rx.Observable;
 public interface SearchService {
 
     @GET(ApiEndPoints.SEARCH + "/issues")
-    Observable<SearchResponse> findPRs(@Query("q") String searchQuery);
+    Observable<SearchResponse> findPRs(@Query(encoded = true, value = "q") String searchQuery);
 
     @GET(ApiEndPoints.SEARCH + "/issues")
-    Observable<SearchResponse> findIssues(@Query("q") String searchQuery);
+    Observable<SearchResponse> findIssues(@Query(encoded = true, value = "q") String searchQuery);
 
 
 

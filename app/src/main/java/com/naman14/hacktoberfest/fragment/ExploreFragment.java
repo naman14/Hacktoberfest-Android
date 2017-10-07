@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,23 +20,28 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.naman14.hacktoberfest.MainActivity;
 import com.naman14.hacktoberfest.R;
-import com.naman14.hacktoberfest.adapters.PRAdapter;
 import com.naman14.hacktoberfest.adapters.ProjectsAdapter;
 import com.naman14.hacktoberfest.network.entity.Issue;
-import com.naman14.hacktoberfest.network.entity.Label;
+import com.naman14.hacktoberfest.network.repository.GithubRepository;
 import com.naman14.hacktoberfest.utils.AnimUtils;
 import com.naman14.hacktoberfest.utils.FabAnimationUtils;
 import com.naman14.hacktoberfest.utils.Utils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by naman on 4/10/17.
@@ -62,8 +67,13 @@ public class ExploreFragment extends Fragment {
     @BindView(R.id.save_confirmed)
     Button saveConfirmed;
 
+    @BindView(R.id.tv_language)
+    TextView tvLanguage;
+
+    @BindView(R.id.scrollView)
+    NestedScrollView scrollView;
+
     private ProjectsAdapter adapter;
-    private boolean fabVisible;
 
     @Nullable
     @Override
@@ -75,33 +85,7 @@ public class ExploreFragment extends Fragment {
         setupFilter();
         setupRecyclerview();
 
-
-        List<Issue> issues = new ArrayList<>();
-        for (int i=0; i<6; i++) {
-            Issue issue = new Issue();
-            issue.setNumber(319);
-            issue.setTitle("Error plotting data in graph");
-            issue.setHtml_url("https://github.com/openMF/community-app/pull/19");
-            issue.setRepository_url("https://api.github.com/repos/openMF/community-app");
-
-            List<Label> labelList = new ArrayList<>();
-
-            Label label = new Label();
-            label.setColor("009688");
-            label.setName("Hactoberfest");
-            labelList.add(label);
-
-            Label label1 = new Label();
-            label1.setColor("ededed");
-            label1.setName("Beginner");
-            labelList.add(label1);
-
-            issue.setLabels(labelList);
-            issues.add(issue);
-        }
-
-        adapter.setData(issues);
-
+        fetchIssues();
         return rootView;
     }
 
@@ -127,8 +111,46 @@ public class ExploreFragment extends Fragment {
                 saveAndhide();
             }
         });
+
+        tvLanguage.setText(Utils.getLanguagePreference(getActivity()));
+
+        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView view, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > oldScrollY) {
+                    if (fab.getVisibility() != View.INVISIBLE) {
+                        FabAnimationUtils.scaleOut(fab);
+                        fab.setVisibility(View.INVISIBLE);
+                    }
+                }
+                if (scrollY < oldScrollY) {
+                    if (fab.getVisibility() != View.VISIBLE) {
+                        fab.setVisibility(View.VISIBLE);
+                        FabAnimationUtils.scaleIn(fab);
+                    }
+                }
+
+            }
+        });
+
     }
 
+    @OnClick(R.id.tv_language)
+    public void showLanguageDialog() {
+        final String[] array = Utils.getLanguagesArray();
+        new MaterialDialog.Builder(getActivity())
+                .title("Select language")
+                .items(Utils.getLanguagesArray())
+                .itemsCallbackSingleChoice(Arrays.asList(array).indexOf(Utils.getLanguagePreference(getActivity())), new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        tvLanguage.setText(array[which]);
+                        Utils.setLanguagePreference(getActivity(), array[which]);
+                        return true;
+                    }
+                })
+                .show();
+    }
 
     private void setupRecyclerview() {
 
@@ -142,6 +164,36 @@ public class ExploreFragment extends Fragment {
 
     }
 
+    private void fetchIssues() {
+        progressBar.setVisibility(View.VISIBLE);
+        adapter.clearData();
+
+        String language = Utils.getLanguagePreference(getActivity());
+        GithubRepository.getInstance().findIssues(language)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<List<Issue>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        progressBar.setVisibility(View.GONE);
+                        if (getActivity() != null) {
+                            Toast.makeText(getActivity(), "Error fetching projects", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<Issue> response) {
+                        progressBar.setVisibility(View.GONE);
+                        adapter.setData(response);
+
+                    }
+                });
+    }
 
     private void show() {
         FabAnimationUtils.scaleOut(fab);
@@ -202,7 +254,8 @@ public class ExploreFragment extends Fragment {
 
     private void saveAndhide() {
         if (confirmSaveContainer.getVisibility() == View.VISIBLE) {
-            //do things
+            fetchIssues();
+
             hideFilterContainer();
 
         }

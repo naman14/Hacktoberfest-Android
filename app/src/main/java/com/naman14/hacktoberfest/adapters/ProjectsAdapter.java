@@ -16,6 +16,7 @@ import com.naman14.hacktoberfest.R;
 import com.naman14.hacktoberfest.utils.Utils;
 import com.naman14.hacktoberfest.network.entity.Issue;
 import com.naman14.hacktoberfest.network.entity.Label;
+import com.naman14.hacktoberfest.widgets.FlowLayout;
 
 import java.util.List;
 
@@ -31,8 +32,11 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
     private List<Issue> array;
     private Context context;
 
+    private FlowLayout.LayoutParams params;
+
     public ProjectsAdapter(Context context) {
         this.context = context;
+        this.params =  new FlowLayout.LayoutParams(25, 30);
     }
 
     @Override
@@ -50,26 +54,25 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         holder.tvIssueNumber.setText("#"+ issue.getNumber());
         holder.tvIssueTitle.setText(issue.getTitle());
         holder.tvIssueRepo.setText(getRepoFromUrl(issue.getRepository_url()));
-        holder.tvIssueLanguage.setText(issue.getLanguage());
+
+        if (Utils.getLanguagePreference(context).equals("All")) {
+            holder.tvIssueLanguage.setVisibility(View.GONE);
+        } else {
+            holder.tvIssueLanguage.setText(Utils.getLanguagePreference(context));
+        }
 
         if (issue.getLabels() != null && issue.getLabels().size() != 0) {
             for (Label label : issue.getLabels()) {
-//                TextView textView = new TextView(context);
-//                textView.setBackgroundResource(R.drawable.item_label_bg);
 
                 TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.item_label, null);
                 GradientDrawable drawable = (GradientDrawable) textView.getBackground();
 
-                LinearLayout.LayoutParams layoutParams =
-                        new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.setMargins(25, 0, 0, 0);
 
                 drawable.setColor(Color.parseColor("#" + label.getColor()));
                 textView.setText(label.getName());
                 textView.setTextColor(Utils.getContrastColor(Color.parseColor("#" + label.getColor())));
 
-                holder.llLabels.addView(textView, layoutParams);
+                holder.llLabels.addView(textView, params);
             }
         }
 
@@ -99,7 +102,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         TextView tvIssueLanguage;
 
         @BindView(R.id.ll_labels)
-        LinearLayout llLabels;
+        FlowLayout llLabels;
 
 
         public ViewHolder(View v) {
@@ -128,8 +131,10 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
     }
 
     public void clearData() {
-        this.array.clear();
-        notifyDataSetChanged();
+        if (array != null) {
+            this.array.clear();
+            notifyDataSetChanged();
+        }
     }
 
     public List<Issue> getData() {

@@ -49,16 +49,27 @@
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="Language"
+               android:text="Select Language"
                android:textSize="18sp"
                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_language"
+                android:textColor="@android:color/white"
+                android:drawableRight="@drawable/ic_arrow_drop_down"
+                android:textSize="18sp"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="10dp"/>
 
             <Button
                 android:id="@+id/save_confirmed"
                 style="?android:borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="16dp"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="25dp"
                 android:drawableLeft="@drawable/ic_done"
                 android:padding="16dp"
                 android:text="Apply"

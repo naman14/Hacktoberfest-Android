@@ -129,7 +129,7 @@ public class StatusFragment extends BaseFragment {
         GithubRepository.getInstance().findValidPRs(etUsername.getText().toString())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<Object>() {
+                .subscribe(new Subscriber<List<Issue>>() {
                     @Override
                     public void onCompleted() {
 
@@ -142,7 +142,7 @@ public class StatusFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(Object response) {
+                    public void onNext(List<Issue> response) {
                         progressBar.setVisibility(View.GONE);
                         showStatus(response);
 
@@ -150,7 +150,7 @@ public class StatusFragment extends BaseFragment {
                 });
     }
 
-    private void showStatus(Object response) {
+    private void showStatus(List<Issue> response) {
         progressBar.setVisibility(View.GONE);
         statusView.setVisibility(View.VISIBLE);
         Picasso.with(getActivity()).load("https://avatars3.githubusercontent.com/u/8599099?v=4").into(ivUserImage);

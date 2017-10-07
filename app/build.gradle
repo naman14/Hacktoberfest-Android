@@ -30,6 +30,7 @@ dependencies {
 
     compile 'com.android.support:support-vector-drawable:26.0.2'
     compile 'com.roughike:bottom-bar:2.3.1'
+    compile 'com.afollestad.material-dialogs:core:0.9.4.7'
     testCompile 'junit:junit:4.12'
 
     compile "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
@@ -49,4 +50,15 @@ dependencies {
 
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.4'
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '26.0.2'
+            }
+        }
+    }
 }
