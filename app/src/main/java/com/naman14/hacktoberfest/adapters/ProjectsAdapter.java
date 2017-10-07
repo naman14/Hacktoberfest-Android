@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,10 +66,10 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
             for (Label label : issue.getLabels()) {
 
                 TextView textView = (TextView) LayoutInflater.from(context).inflate(R.layout.item_label, null);
+
                 GradientDrawable drawable = (GradientDrawable) textView.getBackground();
-
-
                 drawable.setColor(Color.parseColor("#" + label.getColor()));
+
                 textView.setText(label.getName());
                 textView.setTextColor(Utils.getContrastColor(Color.parseColor("#" + label.getColor())));
 
@@ -109,12 +110,11 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
             super(v);
             ButterKnife.bind(this, v);
 
-            tvIssueNumber.setOnClickListener(new View.OnClickListener() {
+
+            v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(array.get(getAdapterPosition()).getHtml_url()));
-                    context.startActivity(intent);
+                    Utils.openChromeCustomTab(context, array.get(getAdapterPosition()).getHtml_url());
                 }
             });
 
@@ -140,5 +140,6 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
     public List<Issue> getData() {
         return array;
     }
+
 }
 

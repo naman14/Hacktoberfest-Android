@@ -118,9 +118,8 @@ public class ExploreFragment extends Fragment {
             @Override
             public void onScrollChange(NestedScrollView view, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (scrollY > oldScrollY) {
-                    if (fab.getVisibility() != View.INVISIBLE) {
+                    if (fab.getVisibility() == View.VISIBLE) {
                         FabAnimationUtils.scaleOut(fab);
-                        fab.setVisibility(View.INVISIBLE);
                     }
                 }
                 if (scrollY < oldScrollY) {

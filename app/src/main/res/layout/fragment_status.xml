@@ -49,6 +49,8 @@
                     android:padding="20dp"
                     android:hint="Enter Github username"
                     android:background="@color/white"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone"
                     android:textColorHint="@android:color/black" />
 
                 <android.support.v7.widget.AppCompatImageView
@@ -121,7 +123,7 @@
                     android:layout_gravity="center_horizontal"
                     android:id="@+id/tv_pr_count"
                     android:textSize="45sp"
-                    android:text="3"
+                    android:text="0"
                     android:textColor="@android:color/black"/>
 
                 <TextView
@@ -142,8 +144,7 @@
                 android:textSize="20sp"
                 android:textColor="@android:color/black"
                 android:id="@+id/tv_status_message"
-                android:padding="20dp"
-                android:text="It's not too late to start!"/>
+                android:padding="20dp" />
 
             <com.naman14.hacktoberfest.widgets.GridRecyclerView
                 android:layout_width="match_parent"

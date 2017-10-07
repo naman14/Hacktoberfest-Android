@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Issue {
 
-    private String html_url, title, body, createdAt, repository_url;
+    private String html_url, title, body, createdAt, repository_url, state;
     private int id, number;
 
     private String language;
@@ -95,5 +95,13 @@ public class Issue {
 
     public void setLabels(List<Label> labels) {
         this.labels = labels;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

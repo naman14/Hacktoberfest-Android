@@ -1,16 +1,22 @@
 package com.naman14.hacktoberfest.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
 import android.util.Property;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
+import android.view.inputmethod.InputMethodManager;
+
+import com.naman14.hacktoberfest.R;
 
 import java.util.Arrays;
 import java.util.List;
@@ -101,6 +107,21 @@ public class Utils {
         preferences.edit().putString(PREFERENCE_LANGUAGE, language).apply();
     }
 
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public static void openChromeCustomTab(Context context, String url) {
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(context.getResources().getColor(R.color.hacktoberfest_background));
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(context, Uri.parse(url));
+    }
 
 
 }

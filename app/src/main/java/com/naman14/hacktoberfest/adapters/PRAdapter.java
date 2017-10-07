@@ -3,7 +3,10 @@ package com.naman14.hacktoberfest.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 
 import com.naman14.hacktoberfest.R;
 import com.naman14.hacktoberfest.network.entity.Issue;
+import com.naman14.hacktoberfest.utils.Utils;
 
 import java.util.List;
 
@@ -47,6 +51,32 @@ public class PRAdapter extends RecyclerView.Adapter<PRAdapter.ViewHolder> {
         holder.tvPrTitle.setText(issue.getTitle());
         holder.tvPrRepo.setText(getRepoFromUrl(issue.getRepository_url()));
 
+        GradientDrawable drawable = (GradientDrawable) holder.tvPrStatus.getBackground();
+        Drawable img;
+        switch (issue.getState()) {
+            case "open":
+                holder.tvPrStatus.setText("Open");
+                img = context.getResources().getDrawable( R.drawable.git_pull_open);
+                img.setBounds( 0, 0, 50, 50 );
+                holder.tvPrStatus.setCompoundDrawables(img, null, null, null);
+                drawable.setColor(Color.parseColor("#2cbe4e"));
+                break;
+            case "closed":
+                holder.tvPrStatus.setText("Closed");
+                img = context.getResources().getDrawable( R.drawable.git_pull_open);
+                img.setBounds( 0, 0, 50, 50 );
+                holder.tvPrStatus.setCompoundDrawables(img, null, null, null);
+                drawable.setColor(Color.parseColor("#cb2431"));
+                break;
+            case "merged":
+                holder.tvPrStatus.setText("Merged");
+                img = context.getResources().getDrawable( R.drawable.git_pull_merged);
+                img.setBounds( 0, 0, 50, 50 );
+                holder.tvPrStatus.setCompoundDrawables(img, null, null, null);
+                drawable.setColor(Color.parseColor("#6f42c1"));
+                break;
+        }
+
     }
 
     @Override
@@ -69,6 +99,9 @@ public class PRAdapter extends RecyclerView.Adapter<PRAdapter.ViewHolder> {
         @BindView(R.id.tv_pr_repo)
         TextView tvPrRepo;
 
+        @BindView(R.id.tv_pr_status)
+        TextView tvPrStatus;
+
 
         public ViewHolder(View v) {
             super(v);
@@ -77,9 +110,14 @@ public class PRAdapter extends RecyclerView.Adapter<PRAdapter.ViewHolder> {
             tvPrNumber.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(array.get(getAdapterPosition()).getHtml_url()));
-                    context.startActivity(intent);
+                    Utils.openChromeCustomTab(context, array.get(getAdapterPosition()).getHtml_url());
+                }
+            });
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Utils.openChromeCustomTab(context, array.get(getAdapterPosition()).getHtml_url());
                 }
             });
 
@@ -103,5 +141,7 @@ public class PRAdapter extends RecyclerView.Adapter<PRAdapter.ViewHolder> {
     public List<Issue> getData() {
         return array;
     }
+
+
 }
 

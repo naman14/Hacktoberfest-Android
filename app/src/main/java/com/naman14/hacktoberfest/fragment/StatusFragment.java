@@ -1,7 +1,9 @@
 package com.naman14.hacktoberfest.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -11,11 +13,13 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -29,10 +33,10 @@ import com.naman14.hacktoberfest.R;
 import com.naman14.hacktoberfest.adapters.PRAdapter;
 import com.naman14.hacktoberfest.network.entity.Issue;
 import com.naman14.hacktoberfest.network.repository.GithubRepository;
+import com.naman14.hacktoberfest.utils.Utils;
 import com.naman14.hacktoberfest.widgets.GridRecyclerView;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,7 +50,7 @@ import rx.schedulers.Schedulers;
  * Created by naman on 4/10/17.
  */
 
-public class StatusFragment extends BaseFragment {
+public class StatusFragment extends Fragment {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -59,6 +63,12 @@ public class StatusFragment extends BaseFragment {
 
     @BindView(R.id.tv_placeholder)
     TextView tvPlaceholder;
+
+    @BindView(R.id.tv_pr_count)
+    TextView tvPrCount;
+
+    @BindView(R.id.tv_status_message)
+    TextView tvStatusMessage;
 
     @BindView(R.id.iv_check)
     ImageView ivCheck;
@@ -81,9 +91,19 @@ public class StatusFragment extends BaseFragment {
 
         ButterKnife.bind(this, rootView);
 
-        setToolbar(rootView, "Hacktoberfest");
-
         setupRecyclerview();
+
+        etUsername.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    Utils.hideKeyboard(getActivity());
+                    checkPRStatus();
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
         return rootView;
@@ -92,22 +112,7 @@ public class StatusFragment extends BaseFragment {
 
     @OnClick(R.id.iv_check)
     public void checkClicked() {
-//        checkPRStatus();
-
-        tvPlaceholder.setVisibility(View.GONE);
-        statusView.setVisibility(View.GONE);
-
-        progressBar.setVisibility(View.VISIBLE);
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showStatus(null);
-
-            }
-        }, 1000);
-
+        checkPRStatus();
 
     }
 
@@ -124,8 +129,10 @@ public class StatusFragment extends BaseFragment {
     }
 
     private void checkPRStatus() {
+        tvPlaceholder.setVisibility(View.GONE);
         statusView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
+
         GithubRepository.getInstance().findValidPRs(etUsername.getText().toString())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -148,12 +155,27 @@ public class StatusFragment extends BaseFragment {
 
                     }
                 });
+
     }
 
-    private void showStatus(List<Issue> response) {
+    private void showStatus(final List<Issue> response) {
         progressBar.setVisibility(View.GONE);
         statusView.setVisibility(View.VISIBLE);
-        Picasso.with(getActivity()).load("https://avatars3.githubusercontent.com/u/8599099?v=4").into(ivUserImage);
+
+        if (response != null && response.size() != 0) {
+            Picasso.with(getActivity()).load(response.get(0).getUser().getAvatar_url()).into(ivUserImage);
+        } else {
+            Picasso.with(getActivity()).load("https://github.com/" +
+                    etUsername.getText().toString() + ".png").into(ivUserImage);
+        }
+
+        if (response != null) {
+            tvPrCount.setText(String.valueOf(response.size()));
+            tvStatusMessage.setText(Utils.getStatusMessage(response.size()));
+            adapter.setData(response);
+        } else {
+            tvPrCount.setText("0");
+        }
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -176,21 +198,7 @@ public class StatusFragment extends BaseFragment {
         handler2.postDelayed(new Runnable() {
             @Override
             public void run() {
-                List<Issue> issues = new ArrayList<>();
-                for (int i=0; i<6; i++) {
-                    Issue issue = new Issue();
-                    issue.setNumber(319);
-                    issue.setTitle("Fixes 395 and other improvements");
-                    issue.setHtml_url("https://github.com/openMF/community-app/pull/19");
-                    issue.setRepository_url("https://api.github.com/repos/openMF/community-app");
-
-                    issues.add(issue);
-                }
-
-                adapter.setData(issues);
-                recyclerView.scheduleLayoutAnimation();
-
-
+                adapter.setData(response);
 
             }
         }, 750);
