@@ -6,11 +6,13 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -73,8 +75,12 @@ public class ExploreFragment extends Fragment {
     @BindView(R.id.scrollView)
     NestedScrollView scrollView;
 
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private ProjectsAdapter adapter;
     private int page=1;
+    private Boolean loading=false;
 
     @Nullable
     @Override
@@ -86,8 +92,21 @@ public class ExploreFragment extends Fragment {
         setupFilter();
         setupRecyclerview();
 
+        setupSwipeRefreshLayout();
+
         fetchIssues();
         return rootView;
+    }
+
+    private void setupSwipeRefreshLayout() {
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                page=1;
+                fetchIssues();
+            }
+        });
     }
 
 
@@ -132,8 +151,10 @@ public class ExploreFragment extends Fragment {
                 if(view.getChildAt(view.getChildCount() - 1) != null) {
                     if ((scrollY >= (view.getChildAt(view.getChildCount() - 1).getMeasuredHeight() - view.getMeasuredHeight())) &&
                             scrollY > oldScrollY) {
-                        page++;
-                        fetchIssues();
+                        if (!loading) {
+                            page++;
+                            fetchIssues();
+                        }
                     }
                 }
 
@@ -172,10 +193,14 @@ public class ExploreFragment extends Fragment {
     }
 
     private void fetchIssues() {
+        loading=true;
+        swipeRefreshLayout.setEnabled(false);
         if(page==1) {
             progressBar.setVisibility(View.VISIBLE);
             adapter.clearData();
         }
+        else
+            swipeRefreshLayout.setRefreshing(true);
         String language = Utils.getLanguagePreference(getActivity());
         GithubRepository.getInstance().findIssues(language,page)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -189,6 +214,9 @@ public class ExploreFragment extends Fragment {
                     @Override
                     public void onError(Throwable e) {
                         progressBar.setVisibility(View.GONE);
+                        swipeRefreshLayout.setRefreshing(false);
+                        swipeRefreshLayout.setEnabled(true);
+                        loading=false;
                         if (getActivity() != null) {
                             Toast.makeText(getActivity(), "Error fetching projects", Toast.LENGTH_SHORT).show();
                         }
@@ -197,6 +225,9 @@ public class ExploreFragment extends Fragment {
                     @Override
                     public void onNext(List<Issue> response) {
                         progressBar.setVisibility(View.GONE);
+                        swipeRefreshLayout.setRefreshing(false);
+                        swipeRefreshLayout.setEnabled(true);
+                        loading=false;
                         if(page==1)
                             adapter.setData(response);
                         else
