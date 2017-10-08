@@ -30,6 +30,7 @@ import com.naman14.hacktoberfest.adapters.ProjectsAdapter;
 import com.naman14.hacktoberfest.network.entity.Issue;
 import com.naman14.hacktoberfest.network.repository.GithubRepository;
 import com.naman14.hacktoberfest.utils.AnimUtils;
+import com.naman14.hacktoberfest.utils.EndlessRecyclerViewScrollListener;
 import com.naman14.hacktoberfest.utils.FabAnimationUtils;
 import com.naman14.hacktoberfest.utils.Utils;
 
@@ -74,6 +75,7 @@ public class ExploreFragment extends Fragment {
     NestedScrollView scrollView;
 
     private ProjectsAdapter adapter;
+    private int page=1;
 
     @Nullable
     @Override
@@ -128,6 +130,13 @@ public class ExploreFragment extends Fragment {
                         FabAnimationUtils.scaleIn(fab);
                     }
                 }
+                if(view.getChildAt(view.getChildCount() - 1) != null) {
+                    if ((scrollY >= (view.getChildAt(view.getChildCount() - 1).getMeasuredHeight() - view.getMeasuredHeight())) &&
+                            scrollY > oldScrollY) {
+                        page++;
+                        fetchIssues();
+                    }
+                }
 
             }
         });
@@ -153,7 +162,7 @@ public class ExploreFragment extends Fragment {
 
     private void setupRecyclerview() {
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new ProjectsAdapter(getActivity());
@@ -164,11 +173,12 @@ public class ExploreFragment extends Fragment {
     }
 
     private void fetchIssues() {
-        progressBar.setVisibility(View.VISIBLE);
-        adapter.clearData();
-
+        if(page==1) {
+            progressBar.setVisibility(View.VISIBLE);
+            adapter.clearData();
+        }
         String language = Utils.getLanguagePreference(getActivity());
-        GithubRepository.getInstance().findIssues(language)
+        GithubRepository.getInstance().findIssues(language,page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<Issue>>() {
@@ -188,8 +198,10 @@ public class ExploreFragment extends Fragment {
                     @Override
                     public void onNext(List<Issue> response) {
                         progressBar.setVisibility(View.GONE);
-                        adapter.setData(response);
-
+                        if(page==1)
+                            adapter.setData(response);
+                        else
+                            adapter.addData(response);
                     }
                 });
     }
@@ -253,8 +265,8 @@ public class ExploreFragment extends Fragment {
 
     private void saveAndhide() {
         if (confirmSaveContainer.getVisibility() == View.VISIBLE) {
+            page=1;
             fetchIssues();
-
             hideFilterContainer();
 
         }
