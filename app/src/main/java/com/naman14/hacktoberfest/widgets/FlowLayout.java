@@ -15,8 +15,8 @@ public class FlowLayout extends ViewGroup {
 
     public static class LayoutParams extends ViewGroup.LayoutParams {
 
-        public final int horizontal_spacing;
-        public final int vertical_spacing;
+        final int horizontal_spacing;
+        final int vertical_spacing;
 
         /**
          * @param horizontal_spacing Pixels between items, horizontally

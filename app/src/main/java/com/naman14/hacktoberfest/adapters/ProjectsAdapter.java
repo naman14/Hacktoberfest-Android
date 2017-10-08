@@ -52,7 +52,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
 
         Issue issue = array.get(position);
 
-        holder.tvIssueNumber.setText("#"+ issue.getNumber());
+        holder.tvIssueNumber.setText("#" + issue.getNumber());
         holder.tvIssueTitle.setText(issue.getTitle());
         holder.tvIssueRepo.setText(getRepoFromUrl(issue.getRepository_url()));
 
@@ -106,7 +106,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         FlowLayout llLabels;
 
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
 
@@ -117,7 +117,6 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
                     Utils.openChromeCustomTab(context, array.get(getAdapterPosition()).getHtml_url());
                 }
             });
-
         }
     }
 

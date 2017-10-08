@@ -1,7 +1,9 @@
 package com.naman14.hacktoberfest.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -83,6 +85,10 @@ public class StatusFragment extends Fragment {
     GridRecyclerView recyclerView;
 
     private PRAdapter adapter;
+    private SharedPreferences prefs;
+
+    private static final String SHARED_PREFS = "hacktoberfest-android";
+    private static final String USERNAME_KEY = "username";
 
     @Nullable
     @Override
@@ -92,6 +98,14 @@ public class StatusFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         setupRecyclerview();
+
+        prefs = getActivity()
+                .getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
+        String storedUsername = prefs.getString(USERNAME_KEY, "");
+        if(!storedUsername.isEmpty()) {
+            etUsername.setText(storedUsername);
+        }
 
         etUsername.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -113,11 +127,9 @@ public class StatusFragment extends Fragment {
     @OnClick(R.id.iv_check)
     public void checkClicked() {
         checkPRStatus();
-
     }
 
     private void setupRecyclerview() {
-
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -125,13 +137,17 @@ public class StatusFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         recyclerView.setNestedScrollingEnabled(false);
-
     }
 
     private void checkPRStatus() {
         tvPlaceholder.setVisibility(View.GONE);
         statusView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
+
+        prefs
+            .edit()
+            .putString(USERNAME_KEY, etUsername.getText().toString())
+            .apply();
 
         GithubRepository.getInstance().findValidPRs(etUsername.getText().toString())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -155,7 +171,6 @@ public class StatusFragment extends Fragment {
 
                     }
                 });
-
     }
 
     private void showStatus(final List<Issue> response) {
@@ -212,7 +227,6 @@ public class StatusFragment extends Fragment {
         getDeepChildOffset(scrollViewParent, view.getParent(), view, childOffset);
         // Scroll to child.
         scrollViewParent.smoothScrollTo(0, childOffset.y - 50);
-
     }
 
     private void getDeepChildOffset(final ViewGroup mainParent, final ViewParent parent, final View child, final Point accumulatedOffset) {
