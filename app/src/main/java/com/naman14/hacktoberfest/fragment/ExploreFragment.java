@@ -30,7 +30,6 @@ import com.naman14.hacktoberfest.adapters.ProjectsAdapter;
 import com.naman14.hacktoberfest.network.entity.Issue;
 import com.naman14.hacktoberfest.network.repository.GithubRepository;
 import com.naman14.hacktoberfest.utils.AnimUtils;
-import com.naman14.hacktoberfest.utils.EndlessRecyclerViewScrollListener;
 import com.naman14.hacktoberfest.utils.FabAnimationUtils;
 import com.naman14.hacktoberfest.utils.Utils;
 
