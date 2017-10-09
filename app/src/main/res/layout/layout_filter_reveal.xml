@@ -46,22 +46,48 @@
             android:paddingRight="15dp"
             android:orientation="vertical">
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Select Language"
-               android:textSize="18sp"
-               android:textColor="@android:color/white"/>
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_language"
-                android:textColor="@android:color/white"
-                android:drawableRight="@drawable/ic_arrow_drop_down"
-                android:textSize="18sp"
-                android:drawablePadding="10dp"
-                android:layout_marginTop="10dp"/>
+                android:gravity="bottom|end"
+                android:orientation="vertical">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Select Language"
+                   android:textSize="18sp"
+                   android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_language"
+                    android:textColor="@android:color/white"
+                    android:drawableRight="@drawable/ic_arrow_drop_down"
+                    android:textSize="18sp"
+                    android:drawablePadding="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Tags"
+                    android:textSize="18sp"
+                    android:paddingTop="16dp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_tag"
+                    android:textColor="@android:color/white"
+                    android:drawableRight="@drawable/ic_arrow_drop_down"
+                    android:textSize="18sp"
+                    android:drawablePadding="10dp"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/save_confirmed"
@@ -71,7 +97,7 @@
                 android:drawablePadding="10dp"
                 android:layout_marginTop="25dp"
                 android:drawableLeft="@drawable/ic_done"
-                android:padding="16dp"
+                android:padding="10dp"
                 android:text="Apply"
                 android:textColor="@android:color/white"/>
 
