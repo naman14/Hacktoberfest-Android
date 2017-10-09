@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Hacktoberfest</string>
+    <string name="header">HACKTOBERFEST</string>
+    <string name="website_link">hacktoberfest.digitalocean.com</string>
+    <string name="about_hacktoberfest">Hacktoberfest is a month long celebration of open source software and is open to everyone in the global community.To get a shirt, you must make four pull requests between October 1–31 in any timezone.</string>
+    <string name="sign_up">Sign up</string>
+    <string name="app_hacktoberfest">This app allows you to check your Hacktoberfest status and explore issues and projects to get started with open source community. This app is open source and available on Github. I have added some issues on Github so feel free to contribute to the development of this app.</string>
+    <string name="view_github">View on Github</string>
+    <string name="note">This app is not affiliated with Hacktoberfest, DigitalOcean or Github</string>
+    <string name="explore_subheader">Looking for some projects to work on? Here are some projects that need help</string>
+    <string name="hint_enter_username">Enter Github username</string>
+    <string name="info">Enter your Github username to check your Hacktoberfest status</string>
+    <string name="zero">0</string>
+    <string name="out_of">/4</string>
+    <string name="select_language">Select Language</string>
+    <string name="apply">Apply</string>
 </resources>

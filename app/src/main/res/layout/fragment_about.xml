@@ -16,17 +16,16 @@
             android:orientation="vertical"
             android:background="@color/colorPrimary">
 
-
             <com.naman14.hacktoberfest.widgets.TypefaceTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="HACKTOBERFEST"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
+                android:text="@string/header"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
                 android:gravity="center_horizontal|center_vertical"
-                android:textSize="30sp"
-                android:padding="20dp"
+                android:textSize="@dimen/app_heading"
+                android:padding="@dimen/padding"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/hactoberfest_text_color"
                 app:typeface="ArefRuqaa-Bold"/>
@@ -35,14 +34,14 @@
                 android:id="@+id/tv_website"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hacktoberfest.digitalocean.com"
+                android:text="@string/website_link"
                 android:layout_gravity="center_horizontal"
-                android:padding="20dp"
-                android:layout_marginTop="5dp"
+                android:padding="@dimen/padding"
+                android:layout_marginTop="@dimen/margin_top"
                 android:gravity="center_horizontal"
-                android:textSize="17sp"
+                android:textSize="@dimen/text_subheader"
                 android:textColor="@android:color/white"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="@dimen/margin"/>
 
         </LinearLayout>
 
@@ -50,8 +49,8 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardElevation="2dp">
+            android:layout_margin="@dimen/card_margin"
+            app:cardElevation="@dimen/card_elevation">
 
 
             <LinearLayout
@@ -62,31 +61,31 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hacktoberfest"
+                    android:text="@string/app_name"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:layout_margin="15dp"/>
+                    android:textSize="@dimen/card_header"
+                    android:layout_margin="@dimen/card_header_margin"/>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#22000000"/>
+                    android:layout_height="@dimen/view_height"
+                    android:background="@color/view_color"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="Hacktoberfest is a month long celebration of open source software and is open to everyone in the global community.To get a shirt, you must make four pull requests between October 1–31 in any timezone."/>
+                    android:layout_margin="@dimen/margin"
+                    android:text="@string/about_hacktoberfest"/>
 
                 <TextView
                     android:id="@+id/tv_sign_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="Sign up"
-                    android:layout_gravity="right"
-                    android:paddingRight="30dp"
-                    android:paddingBottom="15dp"/>
+                    android:text="@string/sign_up"
+                    android:layout_gravity="end"
+                    android:paddingRight="@dimen/card_link_padding_right"
+                    android:paddingBottom="@dimen/card_header_margin"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -94,8 +93,8 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardElevation="2dp">
+            android:layout_margin="@dimen/card_margin"
+            app:cardElevation="@dimen/card_elevation">
 
 
             <LinearLayout
@@ -107,18 +106,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="This app allows you to check your Hacktoberfest status and explore issues and projects to get started with open source community. This app is open source and available on Github. I have added some issues on Github so feel free to contribute to the development of this app."/>
+                    android:layout_margin="@dimen/margin"
+                    android:text="@string/app_hacktoberfest"/>
 
                 <TextView
                     android:id="@+id/tv_view_github"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
-                    android:text="View on Github"
-                    android:layout_gravity="right"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="15dp"/>
+                    android:text="@string/view_github"
+                    android:layout_gravity="end"
+                    android:paddingRight="@dimen/padding"
+                    android:paddingBottom="@dimen/card_header_margin"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -127,14 +126,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/margin"
             android:gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:text="This app is not affiliated with Hacktoberfest, DigitalOcean or Github "/>
+            android:layout_marginBottom="@dimen/margin"
+            android:text="@string/note"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="@dimen/view"/>
 
     </LinearLayout>
 

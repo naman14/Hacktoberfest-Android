@@ -25,13 +25,13 @@
         <com.naman14.hacktoberfest.widgets.TypefaceTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="HACKTOBERFEST"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:text="@string/header"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
             android:gravity="center_horizontal|center_vertical"
-            android:textSize="30sp"
-            android:padding="20dp"
+            android:textSize="@dimen/app_heading"
+            android:padding="@dimen/padding"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/hactoberfest_text_color"
             app:typeface="ArefRuqaa-Bold"/>
@@ -39,12 +39,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Looking for some projects to work on? Here are some projects that need help"
+            android:text="@string/explore_subheader"
             android:layout_gravity="center_horizontal"
-            android:padding="20dp"
+            android:padding="@dimen/padding"
             android:gravity="center_horizontal"
             android:textColor="@android:color/white"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="@dimen/card_header_margin"/>
     </LinearLayout>
 
 
@@ -52,7 +52,7 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="@dimen/progress_margin"
             android:id="@+id/progressBar"
             android:visibility="gone"
             android:layout_gravity="center_horizontal"/>
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/recyclerView"
-            android:paddingBottom="80dp"
+            android:paddingBottom="@dimen/recycler_margin_bottom"
             android:clipToPadding="false"/>
 
     </LinearLayout>
