@@ -47,7 +47,7 @@ public class PRAdapter extends RecyclerView.Adapter<PRAdapter.ViewHolder> {
 
         Issue issue = array.get(position);
 
-        holder.tvPrNumber.setText("#"+ issue.getNumber());
+        holder.tvPrNumber.setText("#" + issue.getNumber());
         holder.tvPrTitle.setText(issue.getTitle());
         holder.tvPrRepo.setText(getRepoFromUrl(issue.getRepository_url()));
 
@@ -103,7 +103,7 @@ public class PRAdapter extends RecyclerView.Adapter<PRAdapter.ViewHolder> {
         TextView tvPrStatus;
 
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
 

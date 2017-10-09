@@ -200,7 +200,6 @@ public class ExploreFragment extends Fragment {
         confirmSaveContainer.setVisibility(View.VISIBLE);
         resultsScrim.setVisibility(View.VISIBLE);
 
-
         confirmSaveContainer.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver
                 .OnPreDrawListener() {
             @Override
@@ -242,7 +241,6 @@ public class ExploreFragment extends Fragment {
         });
 
         ((MainActivity)getActivity()).getBottomBar().getShySettings().hideBar();
-
     }
 
     private void hide() {
@@ -256,7 +254,6 @@ public class ExploreFragment extends Fragment {
             fetchIssues();
 
             hideFilterContainer();
-
         }
     }
 
@@ -287,7 +284,6 @@ public class ExploreFragment extends Fragment {
         hideConfirmation.start();
 
         ((MainActivity)getActivity()).getBottomBar().getShySettings().showBar();
-
 
     }
 

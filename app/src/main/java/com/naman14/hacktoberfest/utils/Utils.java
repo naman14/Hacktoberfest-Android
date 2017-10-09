@@ -45,13 +45,10 @@ public class Utils {
 
 
     public static String[] getLanguagesArray() {
-        String[] languages = new String[] {"All", "JavaScript", "Python", "PHP", "Java", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
-
-        return languages;
+        return new String[] {"All", "JavaScript", "Python", "PHP", "Java", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
     }
 
     public static String getStatusMessage(int prCount){
-
         switch (prCount) {
             case 0:
                 return "It's not too late to start!";
@@ -113,7 +110,9 @@ public class Utils {
         if (view == null) {
             view = new View(activity);
         }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     public static void openChromeCustomTab(Context context, String url) {

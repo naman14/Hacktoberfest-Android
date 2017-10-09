@@ -54,10 +54,9 @@ public class AnimUtils {
 
         @Override
         final public void set(T object, Integer value) {
-            setValue(object, value.intValue());
+            setValue(object, value);
         }
 
     }
-
 
 }
