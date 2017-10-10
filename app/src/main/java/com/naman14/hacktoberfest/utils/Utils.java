@@ -120,6 +120,23 @@ public class Utils {
         }
     }
 
+    public static String getTagsPreferenceString(Context context) {
+        String[] tagsPreference = getTagsPreference(context);
+
+        if (tagsPreference.length == 0) {
+            return "All";
+        } else {
+            StringBuilder tagsText = new StringBuilder();
+
+            for (String tag: tagsPreference) {
+                tagsText.append(tag).append(", ");
+            }
+
+            tagsText.delete(tagsText.length() - 2, tagsText.length());
+            return tagsText.toString();
+        }
+    }
+
     public static void setTagsPreference(Context context, String[] tags) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         preferences.edit().putString(PREFERENCE_TAGS, new Gson().toJson(tags)).apply();

@@ -119,6 +119,7 @@ public class ExploreFragment extends Fragment {
         });
 
         tvLanguage.setText(Utils.getLanguagePreference(getActivity()));
+        tvTag.setText(Utils.getTagsPreferenceString(getActivity()));
 
         scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -160,14 +161,14 @@ public class ExploreFragment extends Fragment {
     @OnClick(R.id.tv_tag)
     public void showTagsDialog() {
         final List<String> tags = Arrays.asList(Utils.getTagsArray());
-        String[] tagsPreferences = Utils.getTagsPreference(getActivity());
+        String[] tagsPreference = Utils.getTagsPreference(getActivity());
         Integer[] tagsArray = {};
 
-        if (tagsPreferences != null) {
-            tagsArray = new Integer[tagsPreferences.length];
+        if (tagsPreference != null) {
+            tagsArray = new Integer[tagsPreference.length];
 
             int index = 0;
-            for (String tagPreference: tagsPreferences) {
+            for (String tagPreference: tagsPreference) {
                 tagsArray[index++] = tags.indexOf(tagPreference);
             }
         }
@@ -187,6 +188,7 @@ public class ExploreFragment extends Fragment {
                             }
 
                             Utils.setTagsPreference(getActivity(), selectedTags);
+                            tvTag.setText(Utils.getTagsPreferenceString(getActivity()));
                             return true;
                         };
                     }
