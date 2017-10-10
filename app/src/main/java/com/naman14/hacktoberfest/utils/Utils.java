@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Property;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -36,13 +37,20 @@ public class Utils {
         return "-label:invalid+created:" + HACKTOBERFEST_START + "+type:pr+is:public+author:" + username;
     }
 
-    public static String getHacktoberfestIssuesQuery(String language) {
+    public static String getHacktoberfestIssuesQuery(String language, String[] tags) {
         String extraQuery = "";
+        String extraQueryTags = "";
 
         if (!TextUtils.isEmpty(language) && !language.equals("All")) {
             extraQuery += "+language:" + language;
         }
-        return "+label:hacktoberfest+updated:" + HACKTOBERFEST_START + "+type:issue+state:open" + extraQuery;
+
+        if (tags.length != 0) {
+            extraQueryTags += Utils.tagsQueryBuilder(tags);
+            Log.d("Utils", "getHacktoberfestIssuesQuery: " + extraQueryTags);
+        }
+
+        return "+label:hacktoberfest" + extraQueryTags + "+updated:" + HACKTOBERFEST_START + "+type:issue+state:open" + extraQuery;
     }
 
 
@@ -120,15 +128,28 @@ public class Utils {
         }
     }
 
-    public static String getTagsPreferenceString(Context context) {
-        String[] tagsPreference = getTagsPreference(context);
+    public static String tagsQueryBuilder(String[] stringArray) {
+        if (stringArray.length == 0) {
+            return null;
+        } else {
+            StringBuilder tagsText = new StringBuilder();
 
-        if (tagsPreference.length == 0) {
+            for (String tag: stringArray) {
+                tagsText.append("+label:\"").append(tag).append("\"");
+            }
+            return tagsText.toString();
+        }
+    }
+
+    public static String getTagsPreferenceString(Context context) {
+        String[] tagsArray = Utils.getTagsPreference(context);
+
+        if (tagsArray.length == 0) {
             return "All";
         } else {
             StringBuilder tagsText = new StringBuilder();
 
-            for (String tag: tagsPreference) {
+            for (String tag: tagsArray) {
                 tagsText.append(tag).append(", ");
             }
 

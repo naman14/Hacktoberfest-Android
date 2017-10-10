@@ -13,7 +13,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -36,7 +35,6 @@ import com.naman14.hacktoberfest.utils.Utils;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -213,7 +211,8 @@ public class ExploreFragment extends Fragment {
         adapter.clearData();
 
         String language = Utils.getLanguagePreference(getActivity());
-        GithubRepository.getInstance().findIssues(language)
+        String[] tags = Utils.getTagsPreference(getActivity());
+        GithubRepository.getInstance().findIssues(language, tags)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<Issue>>() {
