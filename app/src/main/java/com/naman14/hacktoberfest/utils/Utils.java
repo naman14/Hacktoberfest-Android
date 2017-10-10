@@ -33,6 +33,8 @@ public class Utils {
     private static final String PREFERENCE_LANGUAGE = "preference_language";
     private static final String PREFERENCE_TAGS = "preference_tag";
 
+    private static final int TEXTVIEW_TAGS_MAX_LENGTH = 30;
+
     public static String getHacktoberfestStatusQuery(String username) {
         return "-label:invalid+created:" + HACKTOBERFEST_START + "+type:pr+is:public+author:" + username;
     }
@@ -150,10 +152,19 @@ public class Utils {
             StringBuilder tagsText = new StringBuilder();
 
             for (String tag: tagsArray) {
+                if (tagsText.length() >= TEXTVIEW_TAGS_MAX_LENGTH) {
+                    break;
+                }
+
                 tagsText.append(tag).append(", ");
             }
 
             tagsText.delete(tagsText.length() - 2, tagsText.length());
+
+            if (tagsText.length() > TEXTVIEW_TAGS_MAX_LENGTH) {
+                tagsText.append("...");
+            }
+
             return tagsText.toString();
         }
     }
