@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -35,6 +36,7 @@ import com.naman14.hacktoberfest.utils.Utils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +50,7 @@ import rx.schedulers.Schedulers;
  */
 
 public class ExploreFragment extends Fragment {
+    final static String TAG = "ExploreFragment";
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -69,6 +72,9 @@ public class ExploreFragment extends Fragment {
 
     @BindView(R.id.tv_language)
     TextView tvLanguage;
+
+    @BindView(R.id.tv_tag)
+    TextView tvTag;
 
     @BindView(R.id.scrollView)
     NestedScrollView scrollView;
@@ -148,6 +154,43 @@ public class ExploreFragment extends Fragment {
                         return true;
                     }
                 })
+                .show();
+    }
+
+    @OnClick(R.id.tv_tag)
+    public void showTagsDialog() {
+        final List<String> tags = Arrays.asList(Utils.getTagsArray());
+        String[] tagsPreferences = Utils.getTagsPreference(getActivity());
+        Integer[] tagsArray = {};
+
+        if (tagsPreferences != null) {
+            tagsArray = new Integer[tagsPreferences.length];
+
+            int index = 0;
+            for (String tagPreference: tagsPreferences) {
+                tagsArray[index++] = tags.indexOf(tagPreference);
+            }
+        }
+
+        new MaterialDialog.Builder(getActivity())
+                .title("Select Tags")
+                .items(Utils.getTagsArray())
+                .itemsCallbackMultiChoice(tagsArray
+                    , new MaterialDialog.ListCallbackMultiChoice() {
+                        @Override
+                        public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                            String[] selectedTags = new String[text.length];
+                            int index = 0;
+
+                            for (CharSequence charSequence: text) {
+                                selectedTags[index++] = charSequence.toString();
+                            }
+
+                            Utils.setTagsPreference(getActivity(), selectedTags);
+                            return true;
+                        };
+                    }
+                ).positiveText("Select Tags")
                 .show();
     }
 

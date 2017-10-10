@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.view.inputmethod.InputMethodManager;
 
+import com.google.gson.Gson;
 import com.naman14.hacktoberfest.R;
 
 import java.util.Arrays;
@@ -29,6 +30,7 @@ public class Utils {
 
     private static final String HACKTOBERFEST_START = "2017-09-30T00:00:00-12:00..2017-10-31T23:59:59-12:00";
     private static final String PREFERENCE_LANGUAGE = "preference_language";
+    private static final String PREFERENCE_TAGS = "preference_tag";
 
     public static String getHacktoberfestStatusQuery(String username) {
         return "-label:invalid+created:" + HACKTOBERFEST_START + "+type:pr+is:public+author:" + username;
@@ -46,6 +48,10 @@ public class Utils {
 
     public static String[] getLanguagesArray() {
         return new String[] {"All", "JavaScript", "Python", "PHP", "Java", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
+    }
+
+    public static String[] getTagsArray() {
+        return new String[] {"Hacktoberfest", "easy", "intermediate", "hard", "enhancement", "good first issue", "documentation"};
     }
 
     public static String getStatusMessage(int prCount){
@@ -102,6 +108,21 @@ public class Utils {
     public static void setLanguagePreference(Context context, String language) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         preferences.edit().putString(PREFERENCE_LANGUAGE, language).apply();
+    }
+
+    public static String[] getTagsPreference(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String tagsJson = preferences.getString(PREFERENCE_TAGS, null);
+        if (tagsJson == null) {
+            return null;
+        } else {
+            return new Gson().fromJson(tagsJson, String[].class);
+        }
+    }
+
+    public static void setTagsPreference(Context context, String[] tags) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences.edit().putString(PREFERENCE_TAGS, new Gson().toJson(tags)).apply();
     }
 
     public static void hideKeyboard(Activity activity) {
