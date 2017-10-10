@@ -49,7 +49,6 @@ public class Utils {
 
         if (tags.length != 0) {
             extraQueryTags += Utils.tagsQueryBuilder(tags);
-            Log.d("Utils", "getHacktoberfestIssuesQuery: " + extraQueryTags);
         }
 
         return "+label:hacktoberfest" + extraQueryTags + "+updated:" + HACKTOBERFEST_START + "+type:issue+state:open" + extraQuery;
@@ -61,7 +60,15 @@ public class Utils {
     }
 
     public static String[] getTagsArray() {
-        return new String[] {"Hacktoberfest", "easy", "intermediate", "hard", "enhancement", "good first issue", "documentation"};
+        return new String[] {
+                "Hacktoberfest",
+                "easy",
+                "intermediate",
+                "hard",
+                "enhancement",
+                "good first issue",
+                "documentation"
+        };
     }
 
     public static String getStatusMessage(int prCount){

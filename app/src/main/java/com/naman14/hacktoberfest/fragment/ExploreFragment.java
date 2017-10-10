@@ -48,8 +48,6 @@ import rx.schedulers.Schedulers;
  */
 
 public class ExploreFragment extends Fragment {
-    final static String TAG = "ExploreFragment";
-
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -71,8 +69,8 @@ public class ExploreFragment extends Fragment {
     @BindView(R.id.tv_language)
     TextView tvLanguage;
 
-    @BindView(R.id.tv_tag)
-    TextView tvTag;
+    @BindView(R.id.tv_tags)
+    TextView tvTags;
 
     @BindView(R.id.scrollView)
     NestedScrollView scrollView;
@@ -117,7 +115,7 @@ public class ExploreFragment extends Fragment {
         });
 
         tvLanguage.setText(Utils.getLanguagePreference(getActivity()));
-        tvTag.setText(Utils.getTagsPreferenceString(getActivity()));
+        tvTags.setText(Utils.getTagsPreferenceString(getActivity()));
 
         scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -156,25 +154,25 @@ public class ExploreFragment extends Fragment {
                 .show();
     }
 
-    @OnClick(R.id.tv_tag)
+    @OnClick(R.id.tv_tags)
     public void showTagsDialog() {
-        final List<String> tags = Arrays.asList(Utils.getTagsArray());
+        final List<String> tagsList = Arrays.asList(Utils.getTagsArray());
         String[] tagsPreference = Utils.getTagsPreference(getActivity());
-        Integer[] tagsArray = {};
+        Integer[] tagsPreferenceIndex = {};
 
         if (tagsPreference != null) {
-            tagsArray = new Integer[tagsPreference.length];
+            tagsPreferenceIndex = new Integer[tagsPreference.length];
 
             int index = 0;
             for (String tagPreference: tagsPreference) {
-                tagsArray[index++] = tags.indexOf(tagPreference);
+                tagsPreferenceIndex[index++] = tagsList.indexOf(tagPreference);
             }
         }
 
         new MaterialDialog.Builder(getActivity())
                 .title("Select Tags")
                 .items(Utils.getTagsArray())
-                .itemsCallbackMultiChoice(tagsArray
+                .itemsCallbackMultiChoice(tagsPreferenceIndex
                     , new MaterialDialog.ListCallbackMultiChoice() {
                         @Override
                         public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
@@ -186,7 +184,7 @@ public class ExploreFragment extends Fragment {
                             }
 
                             Utils.setTagsPreference(getActivity(), selectedTags);
-                            tvTag.setText(Utils.getTagsPreferenceString(getActivity()));
+                            tvTags.setText(Utils.getTagsPreferenceString(getActivity()));
                             return true;
                         };
                     }
