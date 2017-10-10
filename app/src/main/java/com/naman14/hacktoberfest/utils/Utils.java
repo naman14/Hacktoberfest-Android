@@ -61,13 +61,18 @@ public class Utils {
 
     public static String[] getTagsArray() {
         String[] tagsArray = new String[] {
-                "Hacktoberfest",
+                "help wanted",
                 "easy",
                 "intermediate",
                 "hard",
                 "enhancement",
                 "good first issue",
-                "documentation"
+                "documentation",
+                "good first patch",
+                "beginner",
+                "bug",
+                "design",
+                "ui"
         };
 
         Arrays.sort(tagsArray);
