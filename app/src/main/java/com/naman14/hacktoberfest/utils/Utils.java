@@ -60,7 +60,7 @@ public class Utils {
     }
 
     public static String[] getTagsArray() {
-        return new String[] {
+        String[] tagsArray = new String[] {
                 "Hacktoberfest",
                 "easy",
                 "intermediate",
@@ -69,6 +69,9 @@ public class Utils {
                 "good first issue",
                 "documentation"
         };
+
+        Arrays.sort(tagsArray);
+        return tagsArray;
     }
 
     public static String getStatusMessage(int prCount){
