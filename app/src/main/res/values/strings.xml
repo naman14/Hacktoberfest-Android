@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Hacktoberfest</string>
     <string name="header">HACKTOBERFEST</string>
+    <string name="app_header">Hacktoberfest Android App</string>
     <string name="website_link">hacktoberfest.digitalocean.com</string>
     <string name="about_hacktoberfest">Hacktoberfest is a month long celebration of open source software and is open to everyone in the global community.To get a shirt, you must make four pull requests between October 1–31 in any timezone.</string>
     <string name="sign_up">Sign up</string>

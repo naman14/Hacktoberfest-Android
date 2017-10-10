@@ -16,6 +16,7 @@
     <dimen name="padding_extra">25dp</dimen>
     <dimen name="margin">20dp</dimen>
     <dimen name="padding">20dp</dimen>
+    <dimen name="actual_margin">16dp</dimen>
     <dimen name="card_header_margin">15dp</dimen>
     <dimen name="card_margin">10dp</dimen>
     <dimen name="card_elevation">2dp</dimen>

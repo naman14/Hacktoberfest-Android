@@ -102,6 +102,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_header"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/card_header"
+                    android:layout_margin="@dimen/card_header_margin"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/view_height"
+                    android:background="@color/view_color"/>
 
                 <TextView
                     android:layout_width="wrap_content"
