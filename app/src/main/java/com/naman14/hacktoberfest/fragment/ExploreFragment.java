@@ -79,8 +79,8 @@ public class ExploreFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
 
     private ProjectsAdapter adapter;
-    private int page=1;
-    private Boolean loading=false;
+    private int page = 1;
+    private Boolean loading = false;
 
     @Nullable
     @Override
@@ -193,16 +193,16 @@ public class ExploreFragment extends Fragment {
     }
 
     private void fetchIssues() {
-        loading=true;
+        loading = true;
         swipeRefreshLayout.setEnabled(false);
-        if(page==1) {
+        if(page == 1) {
             progressBar.setVisibility(View.VISIBLE);
             adapter.clearData();
         }
         else
             swipeRefreshLayout.setRefreshing(true);
         String language = Utils.getLanguagePreference(getActivity());
-        GithubRepository.getInstance().findIssues(language,page)
+        GithubRepository.getInstance().findIssues(language, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<Issue>>() {
@@ -216,7 +216,7 @@ public class ExploreFragment extends Fragment {
                         progressBar.setVisibility(View.GONE);
                         swipeRefreshLayout.setRefreshing(false);
                         swipeRefreshLayout.setEnabled(true);
-                        loading=false;
+                        loading = false;
                         if (getActivity() != null) {
                             Toast.makeText(getActivity(), "Error fetching projects", Toast.LENGTH_SHORT).show();
                         }
@@ -227,8 +227,8 @@ public class ExploreFragment extends Fragment {
                         progressBar.setVisibility(View.GONE);
                         swipeRefreshLayout.setRefreshing(false);
                         swipeRefreshLayout.setEnabled(true);
-                        loading=false;
-                        if(page==1)
+                        loading = false;
+                        if(page == 1)
                             adapter.setData(response);
                         else
                             adapter.addData(response);
