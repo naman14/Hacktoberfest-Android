@@ -172,8 +172,7 @@ public class ExploreFragment extends Fragment {
         new MaterialDialog.Builder(getActivity())
                 .title("Select Tags")
                 .items(Utils.getTagsArray())
-                .itemsCallbackMultiChoice(tagsPreferenceIndex
-                    , new MaterialDialog.ListCallbackMultiChoice() {
+                .itemsCallbackMultiChoice(tagsPreferenceIndex, new MaterialDialog.ListCallbackMultiChoice() {
                         @Override
                         public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
                             String[] selectedTags = new String[text.length];
