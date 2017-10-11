@@ -139,7 +139,7 @@ public class Utils {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String tagsJson = preferences.getString(PREFERENCE_TAGS, null);
         if (tagsJson == null) {
-            return null;
+            return new String[] {};
         } else {
             return new Gson().fromJson(tagsJson, String[].class);
         }
