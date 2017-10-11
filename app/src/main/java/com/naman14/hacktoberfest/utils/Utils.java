@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Property;
 import android.view.View;
 import android.view.animation.AnimationUtils;
