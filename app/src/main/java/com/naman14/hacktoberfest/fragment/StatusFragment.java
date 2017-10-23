@@ -111,8 +111,7 @@ public class StatusFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    Utils.hideKeyboard(getActivity());
-                    checkPRStatus();
+                    checkClicked();
                     return true;
                 }
                 return false;
@@ -126,7 +125,20 @@ public class StatusFragment extends Fragment {
 
     @OnClick(R.id.iv_check)
     public void checkClicked() {
-        checkPRStatus();
+
+        Utils.hideKeyboard(getActivity());
+
+        if (etUsername.getText().length()!=0){
+
+            if(Utils.checkValidUsername(etUsername.getText().toString()))
+                checkPRStatus();
+            else
+                Snackbar.make(scrollView, "Invalid UserName", Snackbar.LENGTH_LONG).show();
+        }
+        else {
+                Snackbar.make(scrollView, "UserName Must Not be Empty", Snackbar.LENGTH_LONG).show();
+
+        }
     }
 
     private void setupRecyclerview() {

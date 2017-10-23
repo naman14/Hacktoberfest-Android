@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Property;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -20,6 +21,8 @@ import com.naman14.hacktoberfest.R;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by naman on 4/10/17.
@@ -29,6 +32,8 @@ public class Utils {
 
     private static final String HACKTOBERFEST_START = "2017-09-30T00:00:00-12:00..2017-10-31T23:59:59-12:00";
     private static final String PREFERENCE_LANGUAGE = "preference_language";
+    private static final String USERNAME_REGEX = "^[a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38}$";
+
 
     public static String getHacktoberfestStatusQuery(String username) {
         return "-label:invalid+created:" + HACKTOBERFEST_START + "+type:pr+is:public+author:" + username;
@@ -122,5 +127,19 @@ public class Utils {
         customTabsIntent.launchUrl(context, Uri.parse(url));
     }
 
+    public static Boolean checkValidUsername(String userName){
+
+         Pattern pattern = Pattern.compile(USERNAME_REGEX, Pattern.CASE_INSENSITIVE);
+         Matcher matcher = pattern.matcher(userName);
+        if (matcher.find()){
+            return true;
+
+        }   else {
+
+            return false;
+
+        }
+
+    }
 
 }
