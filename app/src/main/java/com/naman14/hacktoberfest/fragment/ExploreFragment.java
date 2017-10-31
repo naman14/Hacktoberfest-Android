@@ -50,7 +50,6 @@ import rx.schedulers.Schedulers;
  */
 
 public class ExploreFragment extends Fragment {
-
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -71,6 +70,9 @@ public class ExploreFragment extends Fragment {
 
     @BindView(R.id.tv_language)
     TextView tvLanguage;
+
+    @BindView(R.id.tv_tags)
+    TextView tvTags;
 
     @BindView(R.id.scrollView)
     NestedScrollView scrollView;
@@ -133,6 +135,7 @@ public class ExploreFragment extends Fragment {
         });
 
         tvLanguage.setText(Utils.getLanguagePreference(getActivity()));
+        tvTags.setText(Utils.getTagsPreferenceString(getActivity()));
 
         scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -180,6 +183,43 @@ public class ExploreFragment extends Fragment {
                 .show();
     }
 
+    @OnClick(R.id.tv_tags)
+    public void showTagsDialog() {
+        final List<String> tagsList = Arrays.asList(Utils.getTagsArray());
+        String[] tagsPreference = Utils.getTagsPreference(getActivity());
+        Integer[] tagsPreferenceIndex = {};
+
+        if (tagsPreference != null) {
+            tagsPreferenceIndex = new Integer[tagsPreference.length];
+
+            int index = 0;
+            for (String tagPreference: tagsPreference) {
+                tagsPreferenceIndex[index++] = tagsList.indexOf(tagPreference);
+            }
+        }
+
+        new MaterialDialog.Builder(getActivity())
+                .title("Select Tags")
+                .items(Utils.getTagsArray())
+                .itemsCallbackMultiChoice(tagsPreferenceIndex, new MaterialDialog.ListCallbackMultiChoice() {
+                        @Override
+                        public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                            String[] selectedTags = new String[text.length];
+                            int index = 0;
+
+                            for (CharSequence charSequence: text) {
+                                selectedTags[index++] = charSequence.toString();
+                            }
+
+                            Utils.setTagsPreference(getActivity(), selectedTags);
+                            tvTags.setText(Utils.getTagsPreferenceString(getActivity()));
+                            return true;
+                        };
+                    }
+                ).positiveText("Select Tags")
+                .show();
+    }
+
     private void setupRecyclerview() {
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -202,7 +242,9 @@ public class ExploreFragment extends Fragment {
         else
             swipeRefreshLayout.setRefreshing(true);
         String language = Utils.getLanguagePreference(getActivity());
-        GithubRepository.getInstance().findIssues(language, page)
+
+        String[] tags = Utils.getTagsPreference(getActivity());
+        GithubRepository.getInstance().findIssues(language, tags, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<Issue>>() {
