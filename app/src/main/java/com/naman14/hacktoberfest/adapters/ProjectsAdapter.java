@@ -128,7 +128,11 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHo
         this.array = data;
         notifyDataSetChanged();
     }
-
+    public void addData(List<Issue> data) {
+        int positionStart = array.size() + 1;
+        this.array.addAll(data);
+        notifyItemRangeInserted(positionStart,array.size());
+    }
     public void clearData() {
         if (array != null) {
             this.array.clear();

@@ -17,7 +17,7 @@ public interface SearchService {
     Observable<SearchResponse> findPRs(@Query(encoded = true, value = "q") String searchQuery);
 
     @GET(ApiEndPoints.SEARCH + "/issues")
-    Observable<SearchResponse> findIssues(@Query(encoded = true, value = "q") String searchQuery);
+    Observable<SearchResponse> findIssues(@Query(encoded = true, value = "q") String searchQuery, @Query(encoded = true, value = "page") int page);
 
 
 
