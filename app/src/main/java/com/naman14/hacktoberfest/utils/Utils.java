@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.view.inputmethod.InputMethodManager;
 
+import com.google.gson.Gson;
 import com.naman14.hacktoberfest.R;
 
 import java.util.Arrays;
@@ -29,23 +30,52 @@ public class Utils {
 
     private static final String HACKTOBERFEST_START = "2017-09-30T00:00:00-12:00..2017-10-31T23:59:59-12:00";
     private static final String PREFERENCE_LANGUAGE = "preference_language";
+    private static final String PREFERENCE_TAGS = "preference_tag";
+
+    private static final int TEXTVIEW_TAGS_MAX_LENGTH = 30;
 
     public static String getHacktoberfestStatusQuery(String username) {
         return "-label:invalid+created:" + HACKTOBERFEST_START + "+type:pr+is:public+author:" + username;
     }
 
-    public static String getHacktoberfestIssuesQuery(String language) {
+    public static String getHacktoberfestIssuesQuery(String language, String[] tags) {
         String extraQuery = "";
+        String extraQueryTags = "";
 
         if (!TextUtils.isEmpty(language) && !language.equals("All")) {
             extraQuery += "+language:" + language;
         }
-        return "+label:hacktoberfest+updated:" + HACKTOBERFEST_START + "+type:issue+state:open" + extraQuery;
+
+        if (tags.length != 0) {
+            extraQueryTags += Utils.tagsQueryBuilder(tags);
+        }
+
+        return "+label:hacktoberfest" + extraQueryTags + "+updated:" + HACKTOBERFEST_START + "+type:issue+state:open" + extraQuery;
     }
 
 
     public static String[] getLanguagesArray() {
         return new String[] {"All", "JavaScript", "Python", "PHP", "Java", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
+    }
+
+    public static String[] getTagsArray() {
+        String[] tagsArray = new String[] {
+                "help wanted",
+                "easy",
+                "intermediate",
+                "hard",
+                "enhancement",
+                "good first issue",
+                "documentation",
+                "good first patch",
+                "beginner",
+                "bug",
+                "design",
+                "ui"
+        };
+
+        Arrays.sort(tagsArray);
+        return tagsArray;
     }
 
     public static String getStatusMessage(int prCount){
@@ -102,6 +132,60 @@ public class Utils {
     public static void setLanguagePreference(Context context, String language) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         preferences.edit().putString(PREFERENCE_LANGUAGE, language).apply();
+    }
+
+    public static String[] getTagsPreference(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String tagsJson = preferences.getString(PREFERENCE_TAGS, null);
+        if (tagsJson == null) {
+            return new String[] {};
+        } else {
+            return new Gson().fromJson(tagsJson, String[].class);
+        }
+    }
+
+    public static String tagsQueryBuilder(String[] stringArray) {
+        if (stringArray.length == 0) {
+            return null;
+        } else {
+            StringBuilder tagsText = new StringBuilder();
+
+            for (String tag: stringArray) {
+                tagsText.append("+label:\"").append(tag).append("\"");
+            }
+            return tagsText.toString();
+        }
+    }
+
+    public static String getTagsPreferenceString(Context context) {
+        String[] tagsArray = Utils.getTagsPreference(context);
+
+        if (tagsArray.length == 0) {
+            return "All";
+        } else {
+            StringBuilder tagsText = new StringBuilder();
+
+            for (String tag: tagsArray) {
+                if (tagsText.length() >= TEXTVIEW_TAGS_MAX_LENGTH) {
+                    break;
+                }
+
+                tagsText.append(tag).append(", ");
+            }
+
+            tagsText.delete(tagsText.length() - 2, tagsText.length());
+
+            if (tagsText.length() > TEXTVIEW_TAGS_MAX_LENGTH) {
+                tagsText.append("...");
+            }
+
+            return tagsText.toString();
+        }
+    }
+
+    public static void setTagsPreference(Context context, String[] tags) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences.edit().putString(PREFERENCE_TAGS, new Gson().toJson(tags)).apply();
     }
 
     public static void hideKeyboard(Activity activity) {

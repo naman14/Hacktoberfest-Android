@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_issue_repo"
-                tool:text="openMF/community-app"
+                tools:text="openMF/community-app"
                 android:textSize="@dimen/card_header"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/card_margin"
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_issue_language"
-                tool:text="Python"
+                tools:text="Python"
                 android:textSize="@dimen/text_normal"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/card_header_margin"
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_issue_number"
-            tool:text="#319"
+            tools:text="#319"
             android:layout_marginLeft="@dimen/card_margin"
             android:textSize="@dimen/text_small"
             android:textColor="@color/black"/>
@@ -80,7 +80,7 @@
             android:textSize="@dimen/text_normal"
             android:layout_marginLeft="@dimen/card_header_margin"
             android:textColor="@android:color/black"
-            tool:text="Error plotting data in graph" />
+            tools:text="Error plotting data in graph" />
 
 
 

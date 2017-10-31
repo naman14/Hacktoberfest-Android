@@ -7,12 +7,12 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="@dimen/fab"
-        android:layout_height="@dimen/fab"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/recycler_margin_bottom"
-        android:layout_marginRight="@dimen/margin"
-        android:elevation="@dimen/fab_elevation"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="20dp"
+        android:elevation="6dp"
         android:src="@drawable/filter"
         android:stateListAnimator="@animator/raise"
         app:layout_anchorGravity="bottom|end" />
@@ -26,53 +26,82 @@
 
     <FrameLayout
         android:id="@+id/confirm_save_container"
-        android:layout_width="@dimen/frame"
-        android:layout_height="@dimen/frame"
+        android:layout_width="448dp"
+        android:layout_height="448dp"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/recycler_margin_bottom"
-        android:layout_marginRight="@dimen/margin"
+        android:layout_marginBottom="80dp"
+        android:paddingTop="30dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/frame_fab_light"
-        android:elevation="@dimen/fab_elevation"
+        android:elevation="6dp"
         android:theme="@style/ExpandedFabTheme"
-        android:translationX="@dimen/translation"
-        android:translationY="@dimen/translation"
+        android:translationX="196dp"
+        android:translationY="196dp"
         android:visibility="gone">
 
         <LinearLayout
-            android:layout_width="@dimen/layout_linear"
-            android:layout_height="@dimen/layout_linear"
+            android:layout_width="252dp"
+            android:layout_height="252dp"
             android:layout_gravity="start|top"
             android:gravity="bottom|end"
-            android:paddingRight="@dimen/card_header_margin"
+            android:paddingRight="15dp"
             android:orientation="vertical">
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="@string/select_language"
-               android:textSize="@dimen/card_header"
-               android:textColor="@android:color/white"/>
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_language"
-                android:textColor="@android:color/white"
-                android:drawableRight="@drawable/ic_arrow_drop_down"
-                android:textSize="@dimen/card_header"
-                android:drawablePadding="@dimen/card_margin"
-                android:layout_marginTop="@dimen/card_margin"/>
+                android:gravity="bottom|end"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Language"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_language"
+                    android:textColor="@android:color/white"
+                    android:drawableRight="@drawable/ic_arrow_drop_down"
+                    android:textSize="18sp"
+                    android:drawablePadding="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Tags"
+                    android:textSize="18sp"
+                    android:paddingTop="16dp"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:id="@+id/tv_tags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="10dp"
+                    android:maxWidth="220dp"
+                    android:drawableRight="@drawable/ic_arrow_drop_down"
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/save_confirmed"
                 style="?android:borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/card_margin"
-                android:layout_marginTop="@dimen/padding_extra"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="25dp"
                 android:drawableLeft="@drawable/ic_done"
-                android:padding="@dimen/text_normal"
-                android:text="@string/apply"
+                android:padding="10dp"
+                android:text="Apply"
                 android:textColor="@android:color/white"/>
 
         </LinearLayout>

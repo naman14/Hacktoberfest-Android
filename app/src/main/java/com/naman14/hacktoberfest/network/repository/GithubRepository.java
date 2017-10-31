@@ -47,8 +47,9 @@ public class GithubRepository {
     }
 
 
-    public Observable<List<Issue>> findIssues(String language, int page) {
-        return apiManager.getSearchApi().findIssues(Utils.getHacktoberfestIssuesQuery(language), page)
+
+    public Observable<List<Issue>> findIssues(String language, String[] tags, int page) {
+        return apiManager.getSearchApi().findIssues(Utils.getHacktoberfestIssuesQuery(language, tags), page)
                 .flatMap(new Func1<SearchResponse, Observable<List<Issue>>>() {
                     @Override
                     public Observable<List<Issue>> call(SearchResponse response) {
