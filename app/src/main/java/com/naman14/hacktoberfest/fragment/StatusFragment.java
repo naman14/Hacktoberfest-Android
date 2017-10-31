@@ -104,6 +104,7 @@ public class StatusFragment extends Fragment {
         String storedUsername = prefs.getString(USERNAME_KEY, "");
         if(!storedUsername.isEmpty()) {
             etUsername.setText(storedUsername);
+            checkPRStatus();
         }
 
         etUsername.setOnEditorActionListener(new TextView.OnEditorActionListener() {
