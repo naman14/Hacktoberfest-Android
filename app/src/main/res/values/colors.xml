@@ -22,4 +22,6 @@
 
     <color name="scrim">#99323232</color>
     <color name="dark_icon">#99000000</color>
+
+    <color name="view_color">#22000000</color>
 </resources>
