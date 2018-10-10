@@ -28,7 +28,7 @@ import java.util.List;
 
 public class Utils {
 
-    private static final String HACKTOBERFEST_START = "2017-09-30T00:00:00-12:00..2017-10-31T23:59:59-12:00";
+    private static final String HACKTOBERFEST_START = "2018-09-30T00:00:00-12:00..2018-10-31T23:59:59-12:00";
     private static final String PREFERENCE_LANGUAGE = "preference_language";
     private static final String PREFERENCE_TAGS = "preference_tag";
 
