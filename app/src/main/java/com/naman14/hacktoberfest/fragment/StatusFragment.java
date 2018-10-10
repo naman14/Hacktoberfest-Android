@@ -1,11 +1,8 @@
 package com.naman14.hacktoberfest.fragment;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,7 +13,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -24,10 +20,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.naman14.hacktoberfest.MainActivity;
 import com.naman14.hacktoberfest.R;
@@ -201,14 +194,6 @@ public class StatusFragment extends Fragment {
             }
         }, 350);
 
-        Handler handler1 = new Handler();
-        handler1.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ((MainActivity)getActivity()).getBottomBar().getShySettings().hideBar();
-            }
-        }, 450);
-
         Handler handler2 = new Handler();
         handler2.postDelayed(new Runnable() {
             @Override
@@ -216,7 +201,7 @@ public class StatusFragment extends Fragment {
                 adapter.setData(response);
 
             }
-        }, 750);
+        }, 450);
 
     }
 
