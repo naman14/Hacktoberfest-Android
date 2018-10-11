@@ -1,14 +1,15 @@
 package com.naman14.hacktoberfest;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.naman14.hacktoberfest.fragment.AboutFragment;
 import com.naman14.hacktoberfest.fragment.ExploreFragment;
 import com.naman14.hacktoberfest.fragment.StatusFragment;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,7 +17,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.bottomBar)
-    BottomBar bottomBar;
+    BottomNavigationView bottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         replaceFragment(new StatusFragment());
 
-        OnTabSelectListener onTabSelectListener = new OnTabSelectListener() {
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onTabSelected(int tabId) {
-                switch (tabId) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
                     case R.id.tab_status:
                         replaceFragment(new StatusFragment());
                         break;
@@ -40,18 +41,16 @@ public class MainActivity extends AppCompatActivity {
                         replaceFragment(new AboutFragment());
                         break;
                 }
+                return true;
             }
-        };
-
-        bottomBar.setOnTabSelectListener(onTabSelectListener);
-
+        });
     }
 
     private void replaceFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
     }
 
-    public BottomBar getBottomBar() {
+    public BottomNavigationView getBottomBar() {
         return bottomBar;
     }
 }

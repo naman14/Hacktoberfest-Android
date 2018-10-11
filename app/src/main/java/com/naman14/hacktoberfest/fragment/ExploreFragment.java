@@ -6,7 +6,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -50,6 +49,7 @@ import rx.schedulers.Schedulers;
  */
 
 public class ExploreFragment extends Fragment {
+
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -323,9 +323,7 @@ public class ExploreFragment extends Fragment {
                 return false;
             }
         });
-
-        ((MainActivity)getActivity()).getBottomBar().getShySettings().hideBar();
-    }
+        }
 
     private void hide() {
         if (confirmSaveContainer.getVisibility() == View.VISIBLE) {
@@ -366,8 +364,6 @@ public class ExploreFragment extends Fragment {
             }
         });
         hideConfirmation.start();
-
-        ((MainActivity)getActivity()).getBottomBar().getShySettings().showBar();
 
     }
 
