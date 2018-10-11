@@ -28,7 +28,7 @@ import java.util.List;
 
 public class Utils {
 
-    private static final String HACKTOBERFEST_START = "2017-09-30T00:00:00-12:00..2017-10-31T23:59:59-12:00";
+    private static final String HACKTOBERFEST_START = "2018-09-30T00:00:00-12:00..2018-10-31T23:59:59-12:00";
     private static final String PREFERENCE_LANGUAGE = "preference_language";
     private static final String PREFERENCE_TAGS = "preference_tag";
 
@@ -85,12 +85,14 @@ public class Utils {
             case 1:
                 return "Off to a great start, keep going!";
             case 2:
-                return "Half way there, keep it up!";
+                return "One short on halfway, keep on going!";
             case 3:
-                return "So close!";
+                return "Half way there, keep it up!";
             case 4:
-                return "Way to go!";
+                return "So close!";
             case 5:
+                return "Way to go!";
+            case 6:
                 return "Now you're just showing off!";
             default:
                 return "Now you're just showing off!";
