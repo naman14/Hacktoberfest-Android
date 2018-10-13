@@ -85,13 +85,13 @@ public class Utils {
             case 1:
                 return "Off to a great start, keep going!";
             case 2:
-                return "Half way there, keep it up!";
+                return "Keep it up!";
             case 3:
-                return "So close!";
+                return "Nice! Now, don't stop";
             case 4:
-                return "Way to go!";
+                return "So close!";
             case 5:
-                return "Now you're just showing off!";
+                return "Way to go!";
             default:
                 return "Now you're just showing off!";
         }
