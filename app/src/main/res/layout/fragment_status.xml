@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/scrollView"
     android:overScrollMode="never"
+    android:background="@color/darkgray"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout

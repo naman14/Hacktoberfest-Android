@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.naman14.hacktoberfest.MainActivity;
 import com.naman14.hacktoberfest.R;
 import com.naman14.hacktoberfest.adapters.PRAdapter;
+import com.naman14.hacktoberfest.network.api.BaseURL;
 import com.naman14.hacktoberfest.network.entity.Issue;
 import com.naman14.hacktoberfest.network.repository.GithubRepository;
 import com.naman14.hacktoberfest.utils.Utils;
@@ -171,9 +172,9 @@ public class StatusFragment extends Fragment {
         statusView.setVisibility(View.VISIBLE);
 
         if (response != null && response.size() != 0) {
-            Picasso.with(getActivity()).load(response.get(0).getUser().getAvatar_url()).into(ivUserImage);
+            Picasso.get().load(response.get(0).getUser().getAvatar_url()).into(ivUserImage);
         } else {
-            Picasso.with(getActivity()).load("https://github.com/" +
+            Picasso.get().load(BaseURL.URL_GITHUB +
                     etUsername.getText().toString() + ".png").into(ivUserImage);
         }
 
