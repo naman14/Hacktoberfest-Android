@@ -55,11 +55,32 @@ public class Utils {
 
 
     public static String[] getLanguagesArray() {
-        return new String[] {"All", "JavaScript", "Python", "PHP", "Java", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
+        String[] languagesArray = new String[]{
+                "All",
+                "JavaScript",
+                "Python",
+                "PHP",
+                "Java",
+                "Go",
+                "C++",
+                "C",
+                "HTML",
+                "Ruby",
+                "Rust",
+                "CSS",
+                "Kotlin",
+                "Shell",
+                "C#",
+                "Swift",
+                "Scala",
+                "TypeScript"
+        };
+        Arrays.sort(languagesArray);
+        return languagesArray;
     }
 
     public static String[] getTagsArray() {
-        String[] tagsArray = new String[] {
+        String[] tagsArray = new String[]{
                 "help wanted",
                 "easy",
                 "intermediate",
@@ -71,14 +92,20 @@ public class Utils {
                 "beginner",
                 "bug",
                 "design",
-                "ui"
+                "ui",
+                "easy pick",
+                "test",
+                "refactoring",
+                "trivial",
+                "translation",
+                "feature"
         };
 
         Arrays.sort(tagsArray);
         return tagsArray;
     }
 
-    public static String getStatusMessage(int prCount){
+    public static String getStatusMessage(int prCount) {
         switch (prCount) {
             case 0:
                 return "It's not too late to start!";
@@ -138,7 +165,7 @@ public class Utils {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String tagsJson = preferences.getString(PREFERENCE_TAGS, null);
         if (tagsJson == null) {
-            return new String[] {};
+            return new String[]{};
         } else {
             return new Gson().fromJson(tagsJson, String[].class);
         }
@@ -150,7 +177,7 @@ public class Utils {
         } else {
             StringBuilder tagsText = new StringBuilder();
 
-            for (String tag: stringArray) {
+            for (String tag : stringArray) {
                 tagsText.append("+label:\"").append(tag).append("\"");
             }
             return tagsText.toString();
@@ -165,7 +192,7 @@ public class Utils {
         } else {
             StringBuilder tagsText = new StringBuilder();
 
-            for (String tag: tagsArray) {
+            for (String tag : tagsArray) {
                 if (tagsText.length() >= TEXTVIEW_TAGS_MAX_LENGTH) {
                     break;
                 }
