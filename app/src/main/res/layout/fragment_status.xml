@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/padding"
                     android:hint="@string/hint_enter_username"
-                    android:background="@color/white"
+                    android:background="@drawable/edittext_bg"
                     android:singleLine="true"
                     android:imeOptions="actionDone"
                     android:textColorHint="@android:color/darker_gray" />
