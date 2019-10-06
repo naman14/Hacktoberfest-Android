@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/scrollView"
     android:overScrollMode="never"
+    android:background="@color/colorPrimary2"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -106,7 +107,7 @@
                 android:layout_gravity="center_horizontal"
                 app:border_width="@dimen/card_elevation"
                 android:layout_marginTop="@dimen/card_link_padding_right"
-                app:border_color="@color/hactoberfest_text_color"
+                app:border_color="@color/colorAccent2"
                 app:srcCompat="@android:color/transparent"/>
 
             <LinearLayout
@@ -124,7 +125,7 @@
                     android:id="@+id/tv_pr_count"
                     android:textSize="@dimen/big_text"
                     android:text="@string/zero"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/white"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -133,7 +134,7 @@
                     android:paddingTop="@dimen/margin_top"
                     android:layout_gravity="center_vertical"
                     android:textSize="@dimen/app_heading"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/white"/>
 
             </LinearLayout>
 
@@ -142,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textSize="@dimen/text_heading"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:id="@+id/tv_status_message"
                 android:padding="@dimen/padding" />
 
