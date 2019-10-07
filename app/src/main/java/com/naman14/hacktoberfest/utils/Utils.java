@@ -12,15 +12,12 @@ import android.support.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
 import android.util.Property;
 import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
 import com.naman14.hacktoberfest.R;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by naman on 4/10/17.
@@ -28,7 +25,7 @@ import java.util.List;
 
 public class Utils {
 
-    private static final String HACKTOBERFEST_START = "2018-09-30T00:00:00-12:00..2018-10-31T23:59:59-12:00";
+    private static final String HACKTOBERFEST_START = "2019-09-30T00:00:00-12:00..2019-10-31T23:59:59-12:00";
     private static final String PREFERENCE_LANGUAGE = "preference_language";
     private static final String PREFERENCE_TAGS = "preference_tag";
 
@@ -55,7 +52,7 @@ public class Utils {
 
 
     public static String[] getLanguagesArray() {
-        return new String[] {"All", "JavaScript", "Python", "PHP", "Java", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
+        return new String[] {"All", "JavaScript", "Python", "PHP", "Java", "Kotlin", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
     }
 
     public static String[] getTagsArray() {
