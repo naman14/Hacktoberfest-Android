@@ -82,6 +82,7 @@ public class StatusFragment extends Fragment {
 
     private PRAdapter adapter;
     private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     private static final String SHARED_PREFS = "hacktoberfest-android";
     private static final String USERNAME_KEY = "username";
@@ -97,6 +98,7 @@ public class StatusFragment extends Fragment {
 
         prefs = getActivity()
                 .getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+       editor = prefs.edit();
 
         String storedUsername = prefs.getString(USERNAME_KEY, "");
         if(!storedUsername.isEmpty()) {
@@ -138,6 +140,8 @@ public class StatusFragment extends Fragment {
     @OnClick(R.id.iv_clear)
     public void clearUserName(){
         etUsername.setText("");
+        editor.clear();
+        editor.apply();
         iv_clear.setVisibility(View.GONE);
     }
 
@@ -147,6 +151,7 @@ public class StatusFragment extends Fragment {
         if(etUsername.getText().toString().equals("")){
             tvPlaceholder.setVisibility(View.VISIBLE);
             tvPlaceholder.setText("Please enter something!");
+            //pre
             Drawable top = getResources().getDrawable(R.drawable.warning);
             tvPlaceholder.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
         }
