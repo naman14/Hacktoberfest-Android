@@ -87,7 +87,6 @@ public class StatusFragment extends Fragment {
 
     private PRAdapter adapter;
     private SharedPreferences prefs;
-    private SharedPreferences.Editor editor;
 
     private static final String SHARED_PREFS = "hacktoberfest-android";
     private static final String USERNAME_KEY = "username";
@@ -103,7 +102,6 @@ public class StatusFragment extends Fragment {
 
         prefs = getActivity()
                 .getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-       editor = prefs.edit();
 
 
 
@@ -147,8 +145,6 @@ public class StatusFragment extends Fragment {
     @OnClick(R.id.iv_clear)
     public void clearUserName(){
         etUsername.setText("");
-        editor.clear();
-        editor.apply();
         iv_clear.setVisibility(View.GONE);
     }
 
@@ -158,11 +154,14 @@ public class StatusFragment extends Fragment {
         if(etUsername.getText().toString().equals("")){
             tvPlaceholder.setVisibility(View.VISIBLE);
             tvPlaceholder.setText("Please enter something!");
+<<<<<<< HEAD
             fourPR.setVisibility(View.GONE);
             ivUserImage.setVisibility(View.GONE);
             tvPrCount.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);
             tvStatusMessage.setVisibility(View.GONE);
+=======
+>>>>>>> parent of a8488ee... feat : added warnings and clear button on edit text
             Drawable top = getResources().getDrawable(R.drawable.warning);
             tvPlaceholder.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
         }
