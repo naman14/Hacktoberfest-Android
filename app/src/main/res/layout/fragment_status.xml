@@ -53,6 +53,19 @@
                     android:imeOptions="actionDone"
                     android:textColorHint="@android:color/darker_gray" />
 
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/margin_top"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="50dp"
+                    app:srcCompat="@drawable/clear" />
+
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/iv_check"
                     android:layout_width="wrap_content"

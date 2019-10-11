@@ -3,6 +3,7 @@ package com.naman14.hacktoberfest.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -61,6 +62,9 @@ public class StatusFragment extends Fragment {
     @BindView(R.id.tv_pr_count)
     TextView tvPrCount;
 
+    @BindView(R.id.iv_clear)
+    ImageView iv_clear;
+
     @BindView(R.id.tv_status_message)
     TextView tvStatusMessage;
 
@@ -98,6 +102,10 @@ public class StatusFragment extends Fragment {
         if(!storedUsername.isEmpty()) {
             etUsername.setText(storedUsername);
             checkPRStatus();
+            iv_clear.setVisibility(View.VISIBLE);
+        }
+        else {
+            iv_clear.setVisibility(View.VISIBLE);
         }
 
         etUsername.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -117,9 +125,34 @@ public class StatusFragment extends Fragment {
     }
 
 
+    @OnClick(R.id.et_username)
+    public void showClearButton(){
+        if (!etUsername.getText().toString().equals("")){
+            iv_clear.setVisibility(View.VISIBLE);
+        }
+        else {
+            iv_clear.setVisibility(View.GONE);
+        }
+    }
+
+    @OnClick(R.id.iv_clear)
+    public void clearUserName(){
+        etUsername.setText("");
+        iv_clear.setVisibility(View.GONE);
+    }
+
+
     @OnClick(R.id.iv_check)
     public void checkClicked() {
-        checkPRStatus();
+        if(etUsername.getText().toString().equals("")){
+            tvPlaceholder.setVisibility(View.VISIBLE);
+            tvPlaceholder.setText("Please enter something!");
+            Drawable top = getResources().getDrawable(R.drawable.warning);
+            tvPlaceholder.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
+        }
+        else{
+            showClearButton();
+            checkPRStatus();}
     }
 
     private void setupRecyclerview() {
@@ -133,6 +166,7 @@ public class StatusFragment extends Fragment {
     }
 
     private void checkPRStatus() {
+
         tvPlaceholder.setVisibility(View.GONE);
         statusView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
@@ -153,6 +187,7 @@ public class StatusFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
+
                         progressBar.setVisibility(View.GONE);
                         Snackbar.make(scrollView, "Error fetching details", Snackbar.LENGTH_LONG).show();
                     }
