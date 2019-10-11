@@ -20,6 +20,7 @@ import android.view.ViewParent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -65,6 +66,7 @@ public class StatusFragment extends Fragment {
     @BindView(R.id.iv_clear)
     ImageView iv_clear;
 
+
     @BindView(R.id.tv_status_message)
     TextView tvStatusMessage;
 
@@ -79,6 +81,9 @@ public class StatusFragment extends Fragment {
 
     @BindView(R.id.recyclerView)
     GridRecyclerView recyclerView;
+
+    @BindView(R.id.total_required)
+    TextView fourPR;
 
     private PRAdapter adapter;
     private SharedPreferences prefs;
@@ -99,6 +104,8 @@ public class StatusFragment extends Fragment {
         prefs = getActivity()
                 .getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
        editor = prefs.edit();
+
+
 
         String storedUsername = prefs.getString(USERNAME_KEY, "");
         if(!storedUsername.isEmpty()) {
@@ -151,12 +158,21 @@ public class StatusFragment extends Fragment {
         if(etUsername.getText().toString().equals("")){
             tvPlaceholder.setVisibility(View.VISIBLE);
             tvPlaceholder.setText("Please enter something!");
-            //pre
+            fourPR.setVisibility(View.GONE);
+            ivUserImage.setVisibility(View.GONE);
+            tvPrCount.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+            tvStatusMessage.setVisibility(View.GONE);
             Drawable top = getResources().getDrawable(R.drawable.warning);
             tvPlaceholder.setCompoundDrawablesWithIntrinsicBounds(null, top , null, null);
         }
         else{
             showClearButton();
+            fourPR.setVisibility(View.VISIBLE);
+            ivUserImage.setVisibility(View.VISIBLE);
+            tvPrCount.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+            tvStatusMessage.setVisibility(View.VISIBLE);
             checkPRStatus();}
     }
 

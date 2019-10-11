@@ -11,48 +11,35 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="294dp"
+            android:background="@drawable/background"
             android:orientation="vertical"
-            android:padding="@dimen/padding_extra"
-            android:background="@color/colorPrimary">
-
-            <com.naman14.hacktoberfest.widgets.TypefaceTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/header"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
-                android:gravity="center_horizontal|center_vertical"
-                android:textSize="@dimen/app_heading"
-                android:layout_marginTop="@dimen/card_header_margin"
-                android:layout_marginBottom="@dimen/padding_extra"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/hactoberfest_text_color"
-                app:typeface="ArefRuqaa-Bold"/>
+            android:padding="@dimen/padding_extra">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:layout_width="0px"
-                    android:layout_height="0px"/>
-
                 <EditText
                     android:id="@+id/et_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/padding"
+                    android:background="#CC304080"
                     android:hint="@string/hint_enter_username"
-                    android:background="@color/white"
-                    android:singleLine="true"
                     android:imeOptions="actionDone"
-                    android:textColorHint="@android:color/darker_gray" />
+                    android:padding="@dimen/padding"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
 
+                <LinearLayout
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true" />
 
 
                 <android.support.v7.widget.AppCompatImageView
@@ -60,26 +47,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/margin_top"
                     android:layout_gravity="right|center_vertical"
                     android:layout_marginRight="50dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/margin_top"
                     app:srcCompat="@drawable/clear" />
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/iv_check"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_arrow_forward"
                     android:layout_gravity="right|center_vertical"
                     android:layout_marginRight="@dimen/margin"
+                    android:background="?android:attr/selectableItemBackground"
                     android:padding="@dimen/margin_top"
-                    android:background="?android:attr/selectableItemBackground" />
+                    app:srcCompat="@drawable/ic_arrow_forward" />
 
             </FrameLayout>
+            <![CDATA[
 
+
+
+
+                android:layout_height=
+                android:background=@color/white"
+                android:padding="@dimen/padding" />
+
+
+        ]]>
         </LinearLayout>
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -140,6 +136,7 @@
                     android:textColor="@android:color/black"/>
 
                 <TextView
+                    android:id="@+id/total_required"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/out_of"
@@ -173,7 +170,6 @@
 
 
         </LinearLayout>
-
 
 
     </LinearLayout>
