@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <android.support.v4.widget.NestedScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,19 +26,11 @@
                     android:background="@color/colorPrimary"
                     android:orientation="vertical">
 
-                    <com.naman14.hacktoberfest.widgets.TypefaceTextView
+                    <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="@dimen/margin"
-                        android:layout_marginRight="@dimen/margin"
-                        android:layout_marginTop="@dimen/margin"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:padding="@dimen/padding"
-                        android:text="@string/header"
-                        android:textColor="@color/hactoberfest_text_color"
-                        android:textSize="@dimen/app_heading"
-                        app:typeface="ArefRuqaa-Bold" />
+                        android:layout_height="120dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/header"/>
 
                     <TextView
                         android:layout_width="wrap_content"

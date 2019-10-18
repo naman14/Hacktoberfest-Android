@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/scrollView"
     android:overScrollMode="never"
+    android:background="@color/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -11,26 +12,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scaleType="fitStart"
+            android:src="@drawable/header"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/padding_extra"
             android:background="@color/colorPrimary">
-
-            <com.naman14.hacktoberfest.widgets.TypefaceTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/header"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
-                android:gravity="center_horizontal|center_vertical"
-                android:textSize="@dimen/app_heading"
-                android:layout_marginTop="@dimen/card_header_margin"
-                android:layout_marginBottom="@dimen/padding_extra"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/hactoberfest_text_color"
-                app:typeface="ArefRuqaa-Bold"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -76,7 +69,7 @@
             android:id="@+id/tv_placeholder"
             android:layout_margin="@dimen/card_link_padding_right"
             android:paddingTop="@dimen/padding_double"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/card_header"
             android:drawableTop="@drawable/ic_code"
             android:drawablePadding="@dimen/card_margin"
@@ -106,7 +99,7 @@
                 android:layout_gravity="center_horizontal"
                 app:border_width="@dimen/card_elevation"
                 android:layout_marginTop="@dimen/card_link_padding_right"
-                app:border_color="@color/hactoberfest_text_color"
+                app:border_color="@color/colorAccent2"
                 app:srcCompat="@android:color/transparent"/>
 
             <LinearLayout
@@ -124,7 +117,7 @@
                     android:id="@+id/tv_pr_count"
                     android:textSize="@dimen/big_text"
                     android:text="@string/zero"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/white"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -133,7 +126,7 @@
                     android:paddingTop="@dimen/margin_top"
                     android:layout_gravity="center_vertical"
                     android:textSize="@dimen/app_heading"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/white"/>
 
             </LinearLayout>
 
@@ -142,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textSize="@dimen/text_heading"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:id="@+id/tv_status_message"
                 android:padding="@dimen/padding" />
 
