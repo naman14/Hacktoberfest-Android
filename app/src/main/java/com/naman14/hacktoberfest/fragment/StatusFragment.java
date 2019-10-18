@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.naman14.hacktoberfest.MainActivity;
 import com.naman14.hacktoberfest.R;
@@ -119,7 +120,11 @@ public class StatusFragment extends Fragment {
 
     @OnClick(R.id.iv_check)
     public void checkClicked() {
-        checkPRStatus();
+        if(etUsername.getText().toString().isEmpty()){
+            Toast.makeText(getContext(), "Please enter username first", Toast.LENGTH_LONG).show();
+        }else{
+            checkPRStatus();
+        }
     }
 
     private void setupRecyclerview() {

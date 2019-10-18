@@ -52,7 +52,7 @@ public class Utils {
 
 
     public static String[] getLanguagesArray() {
-        return new String[] {"All", "JavaScript", "Python", "PHP", "Java", "Kotlin", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
+        return new String[] {"All", "JavaScript","Dart", "Python", "PHP", "Java", "Kotlin", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
     }
 
     public static String[] getTagsArray() {
