@@ -182,10 +182,7 @@ public class StatusFragment extends Fragment {
         ivUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 String url = response.get(0).getUser().getHtml_url();
-
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
