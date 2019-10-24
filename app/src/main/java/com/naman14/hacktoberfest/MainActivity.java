@@ -1,11 +1,14 @@
 package com.naman14.hacktoberfest;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.naman14.hacktoberfest.fragment.AboutFragment;
 import com.naman14.hacktoberfest.fragment.ExploreFragment;
@@ -23,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //changing status bar color
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.hacktoberfest));
+        }
         ButterKnife.bind(this);
 
         replaceFragment(new StatusFragment());
