@@ -7,7 +7,9 @@
 
     <color name="colorPrimaryDark">#303F9F</color>
 
-    <color name="colorAccent">#FF4081</color>
+    <color name="hacktoberfest">#2A2248</color>
+
+    <color name="colorAccent">#2A2248</color>
 
     <color name="primaryBlue">#3F51B5</color>
     <color name="primaryDarkBlue">#303F9F</color>

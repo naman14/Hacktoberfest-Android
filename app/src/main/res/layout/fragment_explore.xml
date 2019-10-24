@@ -16,42 +16,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:layout_height="206dp"
+                    android:background="@drawable/topbarhacktober"
                     android:orientation="vertical">
 
-                    <com.naman14.hacktoberfest.widgets.TypefaceTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="@dimen/margin"
-                        android:layout_marginRight="@dimen/margin"
-                        android:layout_marginTop="@dimen/margin"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:padding="@dimen/padding"
-                        android:text="@string/header"
-                        android:textColor="@color/hactoberfest_text_color"
-                        android:textSize="@dimen/app_heading"
-                        app:typeface="ArefRuqaa-Bold" />
-
                     <TextView
+                        android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="@dimen/card_header_margin"
+                        android:layout_marginBottom="16dp"
                         android:gravity="center_horizontal"
                         android:padding="@dimen/padding"
                         android:text="@string/explore_subheader"
-                        android:textColor="@android:color/white" />
-                </LinearLayout>
+                        android:textColor="@android:color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
 
 
                 <ProgressBar
@@ -70,6 +59,7 @@
                     android:paddingBottom="@dimen/recycler_margin_bottom" />
 
             </LinearLayout>
+
 
 
         </android.support.v4.widget.NestedScrollView>
