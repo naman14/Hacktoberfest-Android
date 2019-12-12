@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion '28.0.2'
+
     defaultConfig {
         applicationId "com.naman14.hacktoberfest"
         minSdkVersion rootProject.minSdkVersion

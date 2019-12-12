@@ -96,7 +96,7 @@ public class StatusFragment extends Fragment {
                 .getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
         String storedUsername = prefs.getString(USERNAME_KEY, "");
-        if(!storedUsername.isEmpty()) {
+        if (!storedUsername.isEmpty()) {
             etUsername.setText(storedUsername);
             checkPRStatus();
         }
@@ -143,9 +143,9 @@ public class StatusFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
 
         prefs
-            .edit()
-            .putString(USERNAME_KEY, etUsername.getText().toString())
-            .apply();
+                .edit()
+                .putString(USERNAME_KEY, etUsername.getText().toString())
+                .apply();
 
         GithubRepository.getInstance().findValidPRs(etUsername.getText().toString())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -198,6 +198,15 @@ public class StatusFragment extends Fragment {
 
             }
         }, 350);
+
+        Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (getActivity() != null)
+                    ((MainActivity) getActivity()).getBottomBar().getShySettings().hideBar();
+            }
+        }, 450);
 
         Handler handler2 = new Handler();
         handler2.postDelayed(new Runnable() {
