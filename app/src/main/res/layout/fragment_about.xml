@@ -8,6 +8,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/darkgray"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <LinearLayout
@@ -40,7 +41,7 @@
                 android:layout_marginTop="@dimen/margin_top"
                 android:gravity="center_horizontal"
                 android:textSize="@dimen/text_subheader"
-                android:textColor="@android:color/white"
+                android:textColor="@color/hactoberfest_text_description"
                 android:layout_marginBottom="@dimen/margin"/>
 
         </LinearLayout>
@@ -82,7 +83,7 @@
                     android:id="@+id/tv_sign_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/darkgray"
                     android:text="@string/sign_up"
                     android:layout_gravity="end"
                     android:paddingRight="@dimen/card_link_padding_right"
@@ -127,7 +128,7 @@
                     android:id="@+id/tv_view_github"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/darkgray"
                     android:text="@string/view_github"
                     android:layout_gravity="end"
                     android:paddingRight="@dimen/padding"
