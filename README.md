@@ -1,4 +1,4 @@
-# Hacktoberfest-Android
+# Hacktoberfest-InAndroid
 
 This Android app allows you to check your Hacktoberfest status and explore issues 
 and projects to get started with open source community.
