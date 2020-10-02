@@ -28,7 +28,8 @@
                 android:padding="@dimen/padding"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/hactoberfest_text_color"
-                app:typeface="ArefRuqaa-Bold"/>
+                app:typeface="ArefRuqaa-Bold"
+                android:fontFamily="@font/bungee"/>
 
             <TextView
                 android:id="@+id/tv_website"
@@ -39,6 +40,7 @@
                 android:padding="@dimen/padding"
                 android:layout_marginTop="@dimen/margin_top"
                 android:gravity="center_horizontal"
+                android:fontFamily="@font/baloo"
                 android:textSize="@dimen/text_subheader"
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="@dimen/margin"/>
@@ -65,6 +67,7 @@
                     android:text="@string/app_name"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/card_header"
+                    android:fontFamily="@font/montserrat_bold"
                     android:layout_margin="@dimen/card_header_margin"/>
 
                 <View
@@ -76,6 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin"
+android:fontFamily="@font/montserrat"
                     android:text="@string/about_hacktoberfest"/>
 
                 <TextView
@@ -110,6 +114,7 @@
                     android:text="@string/app_header"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/card_header"
+                    android:fontFamily="@font/montserrat_bold"
                     android:layout_margin="@dimen/card_header_margin"/>
 
                 <View
@@ -121,6 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin"
+android:fontFamily="@font/montserrat"
                     android:text="@string/app_hacktoberfest"/>
 
                 <TextView
