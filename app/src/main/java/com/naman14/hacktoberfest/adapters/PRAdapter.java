@@ -61,15 +61,9 @@ public class PRAdapter extends RecyclerView.Adapter<PRAdapter.ViewHolder> {
                 holder.tvPrStatus.setCompoundDrawables(img, null, null, null);
                 drawable.setColor(Color.parseColor("#2cbe4e"));
                 break;
+            // github api doesn't have a way to distinguish between closed and merged state. state is
             case "closed":
-                holder.tvPrStatus.setText("Closed");
-                img = context.getResources().getDrawable( R.drawable.git_pull_open);
-                img.setBounds( 0, 0, 50, 50 );
-                holder.tvPrStatus.setCompoundDrawables(img, null, null, null);
-                drawable.setColor(Color.parseColor("#cb2431"));
-                break;
-            case "merged":
-                holder.tvPrStatus.setText("Merged");
+                holder.tvPrStatus.setText("Merged/Closed");
                 img = context.getResources().getDrawable( R.drawable.git_pull_merged);
                 img.setBounds( 0, 0, 50, 50 );
                 holder.tvPrStatus.setCompoundDrawables(img, null, null, null);
