@@ -154,6 +154,7 @@
                 android:layout_marginRight="@dimen/margin_top"
                 android:layoutAnimation="@anim/grid_layout_animation"/>
 
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_extra"/>
