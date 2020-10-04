@@ -154,6 +154,18 @@
                 android:layout_marginRight="@dimen/margin_top"
                 android:layoutAnimation="@anim/grid_layout_animation"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/text_small"
+                android:textColor="@android:color/black"
+                android:gravity="center_horizontal"
+                android:text="These are all the PRs created by you during Hacktoberfest. Valid PRs that count towards Hacktoberfest might be less than this."
+                android:id="@+id/tv_status_extra_message"
+                android:visibility="gone"
+                android:padding="@dimen/padding" />
+
 
             <View
                 android:layout_width="match_parent"
