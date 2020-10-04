@@ -1,5 +1,6 @@
 package com.naman14.hacktoberfest.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 import com.naman14.hacktoberfest.R;
 
 import java.util.Arrays;
+import java.util.Calendar;
 
 /**
  * Created by naman on 4/10/17.
@@ -25,16 +27,20 @@ import java.util.Arrays;
 
 public class Utils {
 
-    private static final String HACKTOBERFEST_START = "2019-09-30T00:00:00-12:00..2019-10-31T23:59:59-12:00";
+    private static final String HACKTOBERFEST_START = "%d-09-30T00:00:00-12:00..%d-10-31T23:59:59-12:00";
     private static final String PREFERENCE_LANGUAGE = "preference_language";
     private static final String PREFERENCE_TAGS = "preference_tag";
 
     private static final int TEXTVIEW_TAGS_MAX_LENGTH = 30;
 
+    @SuppressLint("DefaultLocale")
     public static String getHacktoberfestStatusQuery(String username) {
-        return "-label:invalid+created:" + HACKTOBERFEST_START + "+type:pr+is:public+author:" + username;
+        return "-label:invalid+created:"
+                + String.format(HACKTOBERFEST_START, yearForHacktoberfest(), yearForHacktoberfest())
+                + "+type:pr+is:public+author:" + username;
     }
 
+    @SuppressLint("DefaultLocale")
     public static String getHacktoberfestIssuesQuery(String language, String[] tags) {
         String extraQuery = "";
         String extraQueryTags = "";
@@ -47,7 +53,9 @@ public class Utils {
             extraQueryTags += Utils.tagsQueryBuilder(tags);
         }
 
-        return "+label:hacktoberfest" + extraQueryTags + "+updated:" + HACKTOBERFEST_START + "+type:issue+state:open" + extraQuery;
+        return "+label:hacktoberfest" + extraQueryTags +
+                "+updated:" + String.format(HACKTOBERFEST_START, yearForHacktoberfest(), yearForHacktoberfest())
+                + "+type:issue+state:open" + extraQuery;
     }
 
 
@@ -203,5 +211,13 @@ public class Utils {
         customTabsIntent.launchUrl(context, Uri.parse(url));
     }
 
-
+    private static int yearForHacktoberfest() {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int yearForHacktoberfest;
+        if (currentMonth >= Calendar.OCTOBER) {
+            yearForHacktoberfest = currentYear;
+        } else yearForHacktoberfest = currentYear - 1;
+        return yearForHacktoberfest;
+    }
 }

@@ -102,7 +102,6 @@ public class PRAdapter extends RecyclerView.Adapter<PRAdapter.ViewHolder> {
         @BindView(R.id.tv_pr_status)
         TextView tvPrStatus;
 
-
         ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
