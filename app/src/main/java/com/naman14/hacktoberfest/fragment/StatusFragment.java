@@ -65,6 +65,9 @@ public class StatusFragment extends Fragment {
     @BindView(R.id.tv_status_message)
     TextView tvStatusMessage;
 
+    @BindView(R.id.tv_status_extra_message)
+    TextView tvStatusExtraMessage;
+
     @BindView(R.id.iv_check)
     ImageView ivCheck;
 
@@ -185,6 +188,8 @@ public class StatusFragment extends Fragment {
         if (response != null) {
             tvPrCount.setText(String.valueOf(response.size()));
             tvStatusMessage.setText(Utils.getStatusMessage(response.size()));
+            if (response.size() > 0)
+                tvStatusExtraMessage.setVisibility(View.VISIBLE);
             adapter.setData(response);
         } else {
             tvPrCount.setText("0");
