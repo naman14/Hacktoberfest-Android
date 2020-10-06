@@ -123,8 +123,10 @@ public class StatusFragment extends Fragment {
 
     @OnClick(R.id.iv_check)
     public void checkClicked() {
-        if(etUsername.getText().toString().isEmpty()){
-            Toast.makeText(getContext(), "Please enter username first", Toast.LENGTH_LONG).show();
+        String username = etUsername.getText().toString();
+
+        if(username.isEmpty() || username.trim().length() == 0){
+            Toast.makeText(getContext(), "Please enter a valid github username", Toast.LENGTH_LONG).show();
         }else{
             checkPRStatus();
         }
