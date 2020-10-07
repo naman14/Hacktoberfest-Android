@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:textAlignment="center"
+    android:visibility="visible"
+    tools:context=".Splash">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="301dp"
+        android:layout_height="270dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/icon" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="410dp"
+        android:layout_height="159dp"
+        android:layout_marginTop="470dp"
+        android:layout_marginBottom="400dp"
+        android:fontFamily="serif"
+        android:text="HACKTOBERFEST"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="46sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="406dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="530dp"
+        android:fontFamily="serif"
+        android:text="Find out your progress!"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="29sp" />
+
+</android.support.design.widget.CoordinatorLayout>
