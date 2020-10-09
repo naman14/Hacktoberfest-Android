@@ -134,6 +134,38 @@
                     android:paddingBottom="@dimen/card_header_margin"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_rate_us"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="8dp"
+            android:layout_margin="@dimen/card_margin"
+            app:cardElevation="@dimen/card_elevation"
+            android:layout_height="50dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_play_foreground"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rate_us_on_play_store"
+                    android:layout_gravity="center"
+                    />
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_forward"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
 
 
         <TextView

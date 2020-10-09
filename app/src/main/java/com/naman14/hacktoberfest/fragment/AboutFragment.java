@@ -1,6 +1,9 @@
 package com.naman14.hacktoberfest.fragment;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.naman14.hacktoberfest.BuildConfig;
 import com.naman14.hacktoberfest.R;
 import com.naman14.hacktoberfest.utils.Utils;
 
@@ -50,5 +54,20 @@ public class AboutFragment extends Fragment {
     @OnClick(R.id.tv_sign_up)
     public void signUp() {
         Utils.openChromeCustomTab(getActivity(), "https://hacktoberfest.digitalocean.com/sign_up/register");
+    }
+
+    @OnClick(R.id.cv_rate_us)
+    public void rateUs(){
+        Uri uri = Uri.parse("market://details?id=" + BuildConfig.APPLICATION_ID);
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (Exception e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID)));
+        }
     }
 }
