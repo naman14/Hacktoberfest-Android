@@ -1,8 +1,8 @@
 package com.naman14.hacktoberfest.widgets;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +10,9 @@ import android.view.animation.GridLayoutAnimationController;
 
 /**
  * An extension of RecyclerView, focused more on resembling a GridView.
- * Unlike {@link android.support.v7.widget.RecyclerView}, this view can handle
+ * Unlike {@link RecyclerView}, this view can handle
  * {@code <gridLayoutAnimation>} as long as you provide it a
- * {@link android.support.v7.widget.GridLayoutManager} in
+ * {@link GridLayoutManager} in
  * {@code setLayoutManager(LayoutManager layout)}.
  *
  * Created by Freddie (Musenkishi) Lust-Hed.
