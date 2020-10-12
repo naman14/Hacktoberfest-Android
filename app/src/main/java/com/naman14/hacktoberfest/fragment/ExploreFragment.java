@@ -270,7 +270,11 @@ public class ExploreFragment extends Fragment {
                         swipeRefreshLayout.setEnabled(true);
                         loading = false;
                         if(page == 1)
-                            adapter.setData(response);
+                            if (response.isEmpty()) {
+                                Toast.makeText(getActivity(), "No matching projects found", Toast.LENGTH_SHORT).show();
+                            } else {
+                                adapter.setData(response);
+                            }
                         else
                             adapter.addData(response);
                     }
