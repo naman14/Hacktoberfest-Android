@@ -13,6 +13,7 @@ import com.naman14.hacktoberfest.fragment.StatusFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+//MAIN ACTIVITY
 
 public class MainActivity extends AppCompatActivity {
 
