@@ -1,8 +1,10 @@
 package com.naman14.hacktoberfest.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.Nullable;
@@ -185,6 +187,16 @@ public class StatusFragment extends Fragment {
             Picasso.with(getActivity()).load("https://github.com/" +
                     etUsername.getText().toString() + ".png").into(ivUserImage);
         }
+
+        ivUserImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = response.get(0).getUser().getHtml_url();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
 
         if (response != null) {
             tvPrCount.setText(String.valueOf(response.size()));
