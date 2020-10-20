@@ -12,7 +12,7 @@
     <string name="hint_enter_username">Enter Github username</string>
     <string name="info">Enter your Github username to check your Hacktoberfest status</string>
     <string name="zero">0</string>
-    <string name="out_of">/4</string>
+    <string name="out_of">/5</string>
     <string name="select_language">Select Language</string>
     <string name="apply">Apply</string>
 </resources>
