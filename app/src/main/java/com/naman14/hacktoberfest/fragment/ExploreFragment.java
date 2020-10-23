@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.ApplicationErrorReport;
+import android.content.ActivityNotFoundException;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
