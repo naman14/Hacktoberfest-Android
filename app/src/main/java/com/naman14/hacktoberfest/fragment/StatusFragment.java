@@ -180,9 +180,9 @@ public class StatusFragment extends Fragment {
         statusView.setVisibility(View.VISIBLE);
 
         if (response != null && response.size() != 0) {
-            Picasso.with(getActivity()).load(response.get(0).getUser().getAvatar_url()).into(ivUserImage);
+            Picasso.get().load(response.get(0).getUser().getAvatar_url()).into(ivUserImage);
         } else {
-            Picasso.with(getActivity()).load("https://github.com/" +
+            Picasso.get().load("https://github.com/" +
                     etUsername.getText().toString() + ".png").into(ivUserImage);
         }
 
