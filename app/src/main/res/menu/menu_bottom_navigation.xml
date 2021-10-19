@@ -3,13 +3,13 @@
 
     <item android:id="@+id/tab_status"
         android:icon="@drawable/ic_av_timer"
-        android:title="Status"/>
+        android:title="@string/status"/>
 
     <item android:id="@+id/tab_explore"
         android:icon="@drawable/compass_outline"
-        android:title="Explore"/>
+        android:title="@string/explore"/>
 
     <item android:id="@+id/tab_about"
         android:icon="@drawable/ic_info_outline"
-        android:title="About"/>
+        android:title="@string/about"/>
 </menu>
