@@ -4,18 +4,22 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+
 import androidx.browser.customtabs.CustomTabsIntent;
+
 import android.text.TextUtils;
 import android.util.Property;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
+import com.naman14.hacktoberfest.MainActivity;
 import com.naman14.hacktoberfest.R;
 
 import java.util.Arrays;
@@ -60,11 +64,11 @@ public class Utils {
 
 
     public static String[] getLanguagesArray() {
-        return new String[] {"All", "JavaScript","Dart", "Python", "PHP", "Java", "Kotlin", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
+        return new String[]{"All", "JavaScript", "Dart", "Python", "PHP", "Java", "Kotlin", "Go", "C++", "C", "HTML", "Ruby", "Rust", "CSS"};
     }
 
     public static String[] getTagsArray() {
-        String[] tagsArray = new String[] {
+        String[] tagsArray = new String[]{
                 "help wanted",
                 "easy",
                 "intermediate",
@@ -83,22 +87,31 @@ public class Utils {
         return tagsArray;
     }
 
-    public static String getStatusMessage(int prCount){
+    public static String getStatusMessage(int prCount) {
+//        return "okay";
         switch (prCount) {
             case 0:
-                return "It's not too late to start!";
+//                return "It's not too late to start!";
+                return MainActivity.getContext().getString(R.string.n_0_pr);
             case 1:
-                return "Off to a great start, keep going!";
+//                return "Off to a great start, keep going!";
+                return MainActivity.getContext().getString(R.string.n_1_pr);
             case 2:
-                return "Half way there, keep it up!";
+//                return "Half way there, keep it up!";
+                return MainActivity.getContext().getString(R.string.n_2_pr);
             case 3:
-                return "So close!";
+//                return "So close!";
+                return MainActivity.getContext().getString(R.string.n_3_pr);
             case 4:
-                return "Way to go!";
-            case 5:
-                return "Now you're just showing off!";
+//                return "Way to go!";
+                return MainActivity.getContext().getString(R.string.n_4_pr);
+            //we don't need case 5, default is the same
+//            case 5:
+////                return "Now you're just showing off!";
+//                return MainActivity.getContext().getString(R.string.n_5_pr);
             default:
-                return "Now you're just showing off!";
+//                return "Now you're just showing off!";
+                return MainActivity.getContext().getString(R.string.n_5_pr);
         }
     }
 
@@ -143,7 +156,7 @@ public class Utils {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String tagsJson = preferences.getString(PREFERENCE_TAGS, null);
         if (tagsJson == null) {
-            return new String[] {};
+            return new String[]{};
         } else {
             return new Gson().fromJson(tagsJson, String[].class);
         }
@@ -155,7 +168,7 @@ public class Utils {
         } else {
             StringBuilder tagsText = new StringBuilder();
 
-            for (String tag: stringArray) {
+            for (String tag : stringArray) {
                 tagsText.append("+label:\"").append(tag).append("\"");
             }
             return tagsText.toString();
@@ -170,7 +183,7 @@ public class Utils {
         } else {
             StringBuilder tagsText = new StringBuilder();
 
-            for (String tag: tagsArray) {
+            for (String tag : tagsArray) {
                 if (tagsText.length() >= TEXTVIEW_TAGS_MAX_LENGTH) {
                     break;
                 }

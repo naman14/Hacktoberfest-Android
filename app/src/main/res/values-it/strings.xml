@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_up">Iscriviti</string>
+    <string name="about_hacktoberfest">Hacktoberfest è un mese di celebrazione del software open source ed è aperto a tutti nella comunità globale. Per ottenere una maglietta, devi effettuare quattro pull request tra il 1° e il 31 ottobre in qualsiasi fuso orario.</string>
+    <string name="app_hacktoberfest">Questa app ti consente di controllare il tuo stato Hacktoberfest ed esplorare problemi e progetti per iniziare con la comunità open source. Questa app è open source e disponibile su Github. Ho aggiunto alcuni problemi su Github, quindi sentiti libero di contribuire allo sviluppo di questa app.</string>
+    <string name="view_github">Vedi su Github</string>
+    <string name="note">Questa app non è affiliata con Hacktoberfest, DigitalOcean o Github"</string>
+    <string name="explore_subheader">Cerchi dei progetti su cui lavorare? Ecco alcuni progetti che hanno bisogno di aiuto</string>
+    <string name="hint_enter_username">Inserisci il tuo nome utente Github</string>
+    <string name="info">"Inserisci il tuo nome utente Github per controllare lo stato dell'Hacktoberfest"</string>
+    <string name="select_language">Scegli Linguaggio</string>
+    <string name="apply">Applica</string>
+    <string name="status">Stato</string>
+    <string name="explore">Esplora</string>
+    <string name="about">Info</string>
+    <string name="prs_description">"Queste sono tutte le PR create da te durante l'Hacktoberfest. Le PR valide che contano per l'Hacktoberfest potrebbero essere inferiori a queste.</string>
+    <string name="n_1_pr">Hai Iniziato alla grande, continua così!</string>
+    <string name="n_0_pr">Non è troppo tardi per iniziare!"</string>
+    <string name="n_2_pr">Sei a metà strada, continua così!</string>
+    <string name="n_3_pr">Sei vicino!</string>
+    <string name="n_4_pr">Ben fatto!</string>
+    <string name="n_5_pr">Ora ti stai solo mettendo in mostra!"</string>
+</resources>
