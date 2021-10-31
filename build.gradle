@@ -34,4 +34,6 @@ ext {
     retrofitVersion = '2.3.0'
     okHttp3Version = '3.9.0'
     butterKnifeVersion = '8.8.1'
+    appcompatVersion = '1.0.0'
+    materialVersion = '1.0.0'
 }
