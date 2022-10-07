@@ -4,7 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +24,7 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,21 +84,32 @@ public class ExploreFragment extends Fragment {
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
+
+    LinearLayout noConnexionIcone;
     private ProjectsAdapter adapter;
     private int page = 1;
     private Boolean loading = false;
 
+    @SuppressLint("RestrictedApi")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_explore, container, false);
-
+        noConnexionIcone=(LinearLayout)rootView.findViewById(R.id.no_connexion);
+        if(isNetworkConnected()==false){
+            hideLayout();
+        }
         ButterKnife.bind(this, rootView);
 
         setupFilter();
         setupRecyclerview();
 
-        setupSwipeRefreshLayout();
+
+        //Allow "Refresh" if the device is connected
+        if(isNetworkConnected()){
+            setupSwipeRefreshLayout();
+        }
+
 
         fetchIssues();
         return rootView;
@@ -137,6 +153,7 @@ public class ExploreFragment extends Fragment {
         tvTags.setText(Utils.getTagsPreferenceString(getActivity()));
 
         scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onScrollChange(NestedScrollView view, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (scrollY > oldScrollY) {
@@ -265,10 +282,12 @@ public class ExploreFragment extends Fragment {
 
                     @Override
                     public void onNext(List<Issue> response) {
+
                         progressBar.setVisibility(View.GONE);
                         swipeRefreshLayout.setRefreshing(false);
                         swipeRefreshLayout.setEnabled(true);
                         loading = false;
+                        showAllLayout();
                         if(page == 1)
                             adapter.setData(response);
                         else
@@ -277,6 +296,7 @@ public class ExploreFragment extends Fragment {
                 });
     }
 
+    @SuppressLint("RestrictedApi")
     private void show() {
         FabAnimationUtils.scaleOut(fab);
         fab.setVisibility(View.INVISIBLE);
@@ -354,6 +374,7 @@ public class ExploreFragment extends Fragment {
         hideConfirmation.setInterpolator(AnimUtils.getFastOutSlowInInterpolator
                 (getActivity()));
         hideConfirmation.addListener(new AnimatorListenerAdapter() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onAnimationEnd(Animator animation) {
                 confirmSaveContainer.setVisibility(View.GONE);
@@ -366,4 +387,32 @@ public class ExploreFragment extends Fragment {
 
     }
 
+    protected boolean isNetworkConnected() {
+        try {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            return (mNetworkInfo == null) ? false : true;
+
+        }catch (NullPointerException e){
+            return false;
+
+        }
+    }
+
+
+    @SuppressLint("RestrictedApi")
+    private void hideLayout(){
+        noConnexionIcone.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+        fab.setVisibility(View.GONE);
+    }
+
+    @SuppressLint("RestrictedApi")
+    private void showAllLayout(){
+        noConnexionIcone.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        fab.setVisibility(View.VISIBLE);
+    }
 }
+

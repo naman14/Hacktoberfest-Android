@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import androidx.browser.customtabs.CustomTabsIntent;
@@ -220,4 +222,5 @@ public class Utils {
         } else yearForHacktoberfest = currentYear - 1;
         return yearForHacktoberfest;
     }
+
 }
