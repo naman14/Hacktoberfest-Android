@@ -3,6 +3,8 @@ package com.naman14.hacktoberfest.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.Nullable;
@@ -19,6 +21,7 @@ import android.view.ViewParent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,10 +88,18 @@ public class StatusFragment extends Fragment {
     private static final String SHARED_PREFS = "hacktoberfest-android";
     private static final String USERNAME_KEY = "username";
 
+    private LinearLayout noConnexion;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_status, container, false);
+        noConnexion=(LinearLayout) rootView.findViewById(R.id.no_connexion);
+        if(isNetworkConnected()==false){
+            noConnexion.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+        }
 
         ButterKnife.bind(this, rootView);
 
@@ -233,5 +244,17 @@ public class StatusFragment extends Fragment {
             return;
         }
         getDeepChildOffset(mainParent, parentGroup.getParent(), parentGroup, accumulatedOffset);
+    }
+
+    protected boolean isNetworkConnected() {
+        try {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            return (mNetworkInfo == null) ? false : true;
+
+        }catch (NullPointerException e){
+            return false;
+
+        }
     }
 }
