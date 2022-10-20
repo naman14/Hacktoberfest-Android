@@ -1,15 +1,15 @@
 package com.naman14.hacktoberfest;
 
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.naman14.hacktoberfest.fragment.AboutFragment;
 import com.naman14.hacktoberfest.fragment.ExploreFragment;
 import com.naman14.hacktoberfest.fragment.StatusFragment;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public static Context getContext(){
+    public static Context getContext() {
         return mContext;
     }
 
