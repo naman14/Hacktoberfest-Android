@@ -161,7 +161,7 @@
                 android:textSize="@dimen/text_small"
                 android:textColor="@android:color/black"
                 android:gravity="center_horizontal"
-                android:text="These are all the PRs created by you during Hacktoberfest. Valid PRs that count towards Hacktoberfest might be less than this."
+                android:text="@string/prs_description"
                 android:id="@+id/tv_status_extra_message"
                 android:visibility="gone"
                 android:padding="@dimen/padding" />

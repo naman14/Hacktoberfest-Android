@@ -1,12 +1,15 @@
 package com.naman14.hacktoberfest;
 
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.naman14.hacktoberfest.fragment.AboutFragment;
 import com.naman14.hacktoberfest.fragment.ExploreFragment;
 import com.naman14.hacktoberfest.fragment.StatusFragment;
@@ -18,10 +21,13 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.bottomBar)
     BottomNavigationView bottomBar;
+    @SuppressLint("StaticFieldLeak")
+    private static Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -44,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    public static Context getContext() {
+        return mContext;
     }
 
     private void replaceFragment(Fragment fragment) {

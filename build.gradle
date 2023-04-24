@@ -2,10 +2,10 @@ buildscript {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.2'
+        classpath 'com.android.tools.build:gradle:7.3.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
 
@@ -14,7 +14,7 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
 }
@@ -26,12 +26,12 @@ task clean(type: Delete) {
 ext {
     // Sdk and tools
     minSdkVersion = 21
-    targetSdkVersion = 28
-    compileSdkVersion = 28
+    targetSdkVersion = 32
+    compileSdkVersion = 32
 
     // App dependencies
     supportLibraryVersion = '26.1.0'
     retrofitVersion = '2.3.0'
-    okHttp3Version = '3.9.0'
-    butterKnifeVersion = '8.8.1'
+    okHttp3Version = '3.12.1'
+    butterKnifeVersion = '10.2.1'
 }
